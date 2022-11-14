@@ -1,2 +1,14 @@
-package ee.valiit.stockwatch;public class HelloWorldController {
+package ee.valiit.stockwatch;
+
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+public class HelloWorldController {
+
+    @GetMapping("/hello/world")
+    public String helloWorld() {
+        return "Hello World!";
+    }
+
 }
