@@ -1,5 +1,5 @@
 -- Created by Vertabelo (http://vertabelo.com)
--- Last modification date: 2022-11-22 12:13:23.472
+-- Last modification date: 2022-11-22 14:14:36.268
 
 -- tables
 -- Table: contact
@@ -9,8 +9,8 @@ CREATE TABLE contact (
                          first_name varchar(50)  NOT NULL,
                          last_name varchar(50)  NOT NULL,
                          email varchar(255)  NOT NULL,
-                         start date  NOT NULL,
-                         "end" date  NOT NULL,
+                         start date  NULL,
+                         "end" date  NULL,
                          CONSTRAINT contact_pk PRIMARY KEY (id)
 );
 
