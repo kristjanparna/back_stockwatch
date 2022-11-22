@@ -28,6 +28,15 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
 	implementation 'org.springdoc:springdoc-openapi-ui:1.6.12'
+
+	//  MapStruct
+	implementation 'org.mapstruct:mapstruct:1.5.3.Final'
+	annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.3.Final'
+}
+
+compileJava {
+	// Ignoring Unmapped Properties (no error, no warning), Inject Spring Components into the Mapper
+	options.compilerArgs += ['-Amapstruct.unmappedTargetPolicy=IGNORE', '-Amapstruct.defaultComponentModel=spring']
 }
 
 tasks.named('test') {
