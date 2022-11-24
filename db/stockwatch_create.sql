@@ -1,5 +1,5 @@
 -- Created by Vertabelo (http://vertabelo.com)
--- Last modification date: 2022-11-22 14:14:36.268
+-- Last modification date: 2022-11-24 10:16:42.274
 
 -- tables
 -- Table: contact
@@ -18,19 +18,19 @@ CREATE TABLE contact (
 CREATE TABLE instrument (
                             id serial  NOT NULL,
                             ticker varchar(255)  NOT NULL,
+                            CONSTRAINT instrument_ak_1 UNIQUE (ticker) NOT DEFERRABLE  INITIALLY IMMEDIATE,
                             CONSTRAINT instrument_pk PRIMARY KEY (id)
 );
 
 -- Table: portfolio
 CREATE TABLE portfolio (
                            id serial  NOT NULL,
+                           user_id int  NOT NULL,
+                           instrument_id int  NOT NULL,
                            purchase_price decimal(6,2)  NOT NULL,
                            amount int  NOT NULL,
                            transaction_fee decimal(4,2)  NULL,
-                           purchase_date date  NOT NULL,
-                           transaction_type boolean  NOT NULL,
-                           user_id int  NOT NULL,
-                           instrument_id int  NOT NULL,
+                           purchase_date date  NOT NULL DEFAULT now(),
                            CONSTRAINT portfolio_pk PRIMARY KEY (id)
 );
 
@@ -39,6 +39,24 @@ CREATE TABLE role (
                       id serial  NOT NULL,
                       type varchar(50)  NOT NULL,
                       CONSTRAINT role_pk PRIMARY KEY (id)
+);
+
+-- Table: transaction
+CREATE TABLE transaction (
+                             id serial  NOT NULL,
+                             portfolio_id int  NOT NULL,
+                             transaction_type_id int  NOT NULL,
+                             amount int  NOT NULL,
+                             price decimal(6,2)  NOT NULL,
+                             date date  NOT NULL DEFAULT now(),
+                             CONSTRAINT transaction_pk PRIMARY KEY (id)
+);
+
+-- Table: transaction_type
+CREATE TABLE transaction_type (
+                                  id serial  NOT NULL,
+                                  name varchar(255)  NOT NULL,
+                                  CONSTRAINT transaction_type_pk PRIMARY KEY (id)
 );
 
 -- Table: user
@@ -54,12 +72,13 @@ CREATE TABLE "user" (
 -- Table: watchlist
 CREATE TABLE watchlist (
                            id serial  NOT NULL,
-                           user_comment varchar(255)  NOT NULL,
-                           comment_date date  NOT NULL,
-                           price_higher decimal(6,2)  NULL,
-                           price_lower decimal(6,2)  NULL,
                            user_id int  NOT NULL,
                            instrument_id int  NOT NULL,
+                           price_higher decimal(6,2)  NULL,
+                           price_lower decimal(6,2)  NULL,
+                           user_comment varchar(255)  NULL,
+                           price_at_addition decimal(6,2)  NOT NULL,
+                           addition_date date  NOT NULL DEFAULT now(),
                            CONSTRAINT watchlist_pk PRIMARY KEY (id)
 );
 
@@ -84,6 +103,22 @@ ALTER TABLE portfolio ADD CONSTRAINT portfolio_instrument
 ALTER TABLE portfolio ADD CONSTRAINT portfolio_user
     FOREIGN KEY (user_id)
         REFERENCES "user" (id)
+        NOT DEFERRABLE
+            INITIALLY IMMEDIATE
+;
+
+-- Reference: transaction_portfolio (table: transaction)
+ALTER TABLE transaction ADD CONSTRAINT transaction_portfolio
+    FOREIGN KEY (portfolio_id)
+        REFERENCES portfolio (id)
+        NOT DEFERRABLE
+            INITIALLY IMMEDIATE
+;
+
+-- Reference: transaction_transaction_type (table: transaction)
+ALTER TABLE transaction ADD CONSTRAINT transaction_transaction_type
+    FOREIGN KEY (transaction_type_id)
+        REFERENCES transaction_type (id)
         NOT DEFERRABLE
             INITIALLY IMMEDIATE
 ;
