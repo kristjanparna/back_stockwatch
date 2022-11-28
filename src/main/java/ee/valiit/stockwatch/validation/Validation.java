@@ -1,7 +1,7 @@
 package ee.valiit.stockwatch.validation;
 
 import ee.valiit.stockwatch.infrastructure.exception.BusinessException;
-import ee.valiit.stockwatch.user.login.User;
+import ee.valiit.stockwatch.domain.user.user.User;
 
 import java.util.Optional;
 

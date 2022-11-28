@@ -1,4 +1,4 @@
-package ee.valiit.stockwatch.user;
+package ee.valiit.stockwatch.domain.user.role;
 
 import lombok.Getter;
 import lombok.Setter;

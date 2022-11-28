@@ -1,4 +1,4 @@
-package ee.valiit.stockwatch.user.user;
+package ee.valiit.stockwatch.domain.user.user;
 
 import lombok.Data;
 
@@ -7,7 +7,7 @@ import javax.validation.constraints.Size;
 import java.io.Serializable;
 
 /**
- * A DTO for the {@link ee.valiit.stockwatch.user.login.User} entity
+ * A DTO for the {@link User} entity
  */
 @Data
 public class UserDto implements Serializable {

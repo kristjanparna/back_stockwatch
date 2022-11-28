@@ -1,7 +1,7 @@
-package ee.valiit.stockwatch.user.register;
+package ee.valiit.stockwatch.domain.user.contact;
 
 
-import ee.valiit.stockwatch.user.Contact;
+import ee.valiit.stockwatch.business.user.register.RegisterRequest;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.ReportingPolicy;

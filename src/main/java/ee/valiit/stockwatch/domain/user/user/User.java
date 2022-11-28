@@ -1,7 +1,7 @@
-package ee.valiit.stockwatch.user.login;
+package ee.valiit.stockwatch.domain.user.user;
 
-import ee.valiit.stockwatch.user.Contact;
-import ee.valiit.stockwatch.user.Role;
+import ee.valiit.stockwatch.domain.user.contact.Contact;
+import ee.valiit.stockwatch.domain.user.role.Role;
 import lombok.Getter;
 import lombok.Setter;
 
