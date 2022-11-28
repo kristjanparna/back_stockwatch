@@ -6,9 +6,9 @@ import org.mapstruct.*;
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = "spring")
 public interface RegisterMapper {
 
-//    @Mapping(source = "contactFirstName", target = "contact.firstName")
-//    @Mapping(source = "contactLastName", target = "contact.lastName")
-//    @Mapping(source = "contactEmail", target = "contact.email")
+    @Mapping(source = "contactFirstName", target = "contact.firstName")
+    @Mapping(source = "contactLastName", target = "contact.lastName")
+    @Mapping(source = "contactEmail", target = "contact.email")
     User registerRequestToUser(RegisterRequest registerRequest);
 
 }

@@ -4,11 +4,7 @@ package ee.valiit.stockwatch.user.login;
 import ee.valiit.stockwatch.user.register.RegisterRequest;
 import ee.valiit.stockwatch.user.register.RegisterService;
 import io.swagger.v3.oas.annotations.Operation;
-import org.mapstruct.Mapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 
@@ -29,7 +25,8 @@ public class LoginController {
     }
     @PostMapping("/register")
     @Operation(summary = "Registreerimise teenus")
-    public void register (@RequestParam RegisterRequest registerRequest) {
+    public void register (@RequestBody RegisterRequest registerRequest) {
         registerService.addUser(registerRequest);
     }
 }
+
