@@ -15,17 +15,17 @@ public class RegisterRequest implements Serializable {
 
     @Size(max = 50)
     @NotNull
-    private final String contactFirstName;
+    private String contactFirstName;
     @Size(max = 50)
     @NotNull
-    private final String contactLastName;
+    private String contactLastName;
     @Size(max = 255)
     @NotNull
-    private final String contactEmail;
+    private String contactEmail;
     @Size(max = 50)
     @NotNull
-    private final String username;
+    private String username;
     @Size(max = 50)
     @NotNull
-    private final String password;
+    private String password;
 }
