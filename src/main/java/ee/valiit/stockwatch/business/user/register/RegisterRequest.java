@@ -1,7 +1,6 @@
-package ee.valiit.stockwatch.user.register;
+package ee.valiit.stockwatch.business.user.register;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import ee.valiit.stockwatch.domain.user.user.User;
 import lombok.Data;
 
 import javax.validation.constraints.NotNull;
@@ -9,10 +8,8 @@ import javax.validation.constraints.Size;
 import java.io.Serializable;
 
 /**
- * A DTO for the {@link ee.valiit.stockwatch.user.login.User} entity
+ * A DTO for the {@link User} entity
  */
-
-@JsonDeserialize
 @Data
 public class RegisterRequest implements Serializable {
 
@@ -31,5 +28,4 @@ public class RegisterRequest implements Serializable {
     @Size(max = 50)
     @NotNull
     private final String password;
-
 }

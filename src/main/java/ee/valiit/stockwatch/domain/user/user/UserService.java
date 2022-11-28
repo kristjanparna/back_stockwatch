@@ -1,6 +1,5 @@
-package ee.valiit.stockwatch.user.user;
+package ee.valiit.stockwatch.domain.user.user;
 
-import ee.valiit.stockwatch.user.login.User;
 import ee.valiit.stockwatch.validation.Validation;
 import org.springframework.stereotype.Service;
 
@@ -14,9 +13,14 @@ public class UserService {
     private UserRepository userRepository;
 
     public User getValidUser (String username, String password) {
-        Optional<User> userOptional = userRepository.findBy(username, password);
+        Optional<User> userOptional = userRepository.findUserBy(username, password);
         Validation.validateUserCredentials(userOptional);
         User user = userOptional.get();
         return user;
+    }
+
+    public void addUser(User user) {
+        //TODO: Validate username not exist
+        userRepository.save(user);
     }
 }
