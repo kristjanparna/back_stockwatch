@@ -1,15 +1,14 @@
 -- Created by Vertabelo (http://vertabelo.com)
--- Last modification date: 2022-11-24 10:16:42.274
+-- Last modification date: 2022-11-28 07:29:59.589
 
 -- tables
 -- Table: contact
 CREATE TABLE contact (
                          id serial  NOT NULL,
-                         user_id int  NOT NULL,
                          first_name varchar(50)  NOT NULL,
                          last_name varchar(50)  NOT NULL,
                          email varchar(255)  NOT NULL,
-                         start date  NULL,
+                         start date  NOT NULL DEFAULT now(),
                          "end" date  NULL,
                          CONSTRAINT contact_pk PRIMARY KEY (id)
 );
@@ -62,7 +61,8 @@ CREATE TABLE transaction_type (
 -- Table: user
 CREATE TABLE "user" (
                         id serial  NOT NULL,
-                        role_id int  NOT NULL,
+                        role_id int  NOT NULL DEFAULT 2,
+                        contact_id int  NULL,
                         username varchar(50)  NOT NULL,
                         password varchar(50)  NOT NULL,
                         CONSTRAINT user_ak_1 UNIQUE (username) NOT DEFERRABLE  INITIALLY IMMEDIATE,
@@ -83,14 +83,6 @@ CREATE TABLE watchlist (
 );
 
 -- foreign keys
--- Reference: contact_user (table: contact)
-ALTER TABLE contact ADD CONSTRAINT contact_user
-    FOREIGN KEY (user_id)
-        REFERENCES "user" (id)
-        NOT DEFERRABLE
-            INITIALLY IMMEDIATE
-;
-
 -- Reference: portfolio_instrument (table: portfolio)
 ALTER TABLE portfolio ADD CONSTRAINT portfolio_instrument
     FOREIGN KEY (instrument_id)
@@ -123,6 +115,14 @@ ALTER TABLE transaction ADD CONSTRAINT transaction_transaction_type
             INITIALLY IMMEDIATE
 ;
 
+-- Reference: user_contact (table: user)
+ALTER TABLE "user" ADD CONSTRAINT user_contact
+    FOREIGN KEY (contact_id)
+        REFERENCES contact (id)
+        NOT DEFERRABLE
+            INITIALLY IMMEDIATE
+;
+
 -- Reference: user_role (table: user)
 ALTER TABLE "user" ADD CONSTRAINT user_role
     FOREIGN KEY (role_id)
@@ -148,3 +148,4 @@ ALTER TABLE watchlist ADD CONSTRAINT watchlist_user
 ;
 
 -- End of file.
+
