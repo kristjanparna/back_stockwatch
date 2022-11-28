@@ -35,13 +35,5 @@ public class UserManagementService {
         user.setRole(role);
         userService.addUser(user);
         System.out.println();
-
-//        Contact contact = contactMapper.registerRequestToContact(registerRequest);
-//        contact.setFirstName(registerRequest.getContactFirstName());
-//        contact.setLastName(registerRequest.getContactLastName());
-//        contact.setEmail(registerRequest.getContactEmail());
-//        user.setContact(contact);
-
-
     }
 }
