@@ -7,15 +7,9 @@ import org.mapstruct.*;
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = "spring")
 public interface UserMapper {
 
-
-
     User registerRequestToUser(RegisterRequest registerRequest);
 
     @Mapping(source = "role.id", target = "roleId")
-    @Mapping(source = "id" , target = "userId")
+    @Mapping(source = "id", target = "userId")
     LoginResponse toLoginResponse(User user);
-
-    @Mapping(source = "role.id", target = "roleId")
-    UserDto userToUserDto(User user);
-
 }

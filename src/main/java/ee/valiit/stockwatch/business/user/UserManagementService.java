@@ -12,6 +12,7 @@ import ee.valiit.stockwatch.domain.user.user.UserService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.time.LocalDate;
 
 @Service
 public class UserManagementService {
@@ -38,19 +39,17 @@ public class UserManagementService {
         return loginResponse;
     }
 
-
-    public void addContact(RegisterRequest registerRequest) {
-        Contact contact = contactMapper.registerRequestToContact(registerRequest);
-        User user = userMapper.registerRequestToUser(registerRequest);
-        user.setContact(contact);
-        contactService.addContact(registerRequest);
-
-    }
-
     public void addUser(RegisterRequest registerRequest) {
         Role role = roleService.getRoleByType("customer");
+
+        Contact contact = contactMapper.registerRequestToContact(registerRequest);
+        contact.setStart(LocalDate.now());
+        contact.setEnd(LocalDate.now());
+        contactService.addContact(contact);
+
         User user = userMapper.registerRequestToUser(registerRequest);
         user.setRole(role);
+        user.setContact(contact);
         userService.addUser(user);
     }
 }

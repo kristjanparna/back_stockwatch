@@ -15,13 +15,13 @@ public class RegisterRequest implements Serializable {
 
     @Size(max = 50)
     @NotNull
-    private String contactFirstName;
+    private String firstname;
     @Size(max = 50)
     @NotNull
-    private String contactLastName;
+    private String lastname;
     @Size(max = 255)
     @NotNull
-    private String contactEmail;
+    private String email;
     @Size(max = 50)
     @NotNull
     private String username;

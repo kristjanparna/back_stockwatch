@@ -9,11 +9,7 @@ import org.mapstruct.ReportingPolicy;
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = "spring")
 public interface ContactMapper {
 
-
-    @Mapping(source = "contactFirstName", target = "firstName")
-    @Mapping(source = "contactLastName", target = "lastName")
-    @Mapping(source = "contactEmail", target = "email")
+    @Mapping(source = "firstname", target = "firstName")
+    @Mapping(source = "lastname", target = "lastName")
     Contact registerRequestToContact(RegisterRequest registerRequest);
-
-
 }

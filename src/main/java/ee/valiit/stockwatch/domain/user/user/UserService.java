@@ -20,7 +20,7 @@ public class UserService {
     }
 
     public void addUser(User user) {
-        //TODO: Validate username not exist
+        // TODO: Validate that the username does not exist
         userRepository.save(user);
     }
 }

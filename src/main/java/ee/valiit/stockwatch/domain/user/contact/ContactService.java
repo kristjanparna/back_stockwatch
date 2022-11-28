@@ -9,18 +9,10 @@ import javax.annotation.Resource;
 @Service
 public class ContactService {
 
-
-    @Resource
-
-    private ContactMapper contactMapper;
-
     @Resource
     private ContactRepository contactRepository;
 
-    public void addContact(RegisterRequest registerRequest) {
-        Contact contact = contactMapper.registerRequestToContact(registerRequest);
+    public void addContact(Contact contact) {
         contactRepository.save(contact);
     }
-
-
 }
