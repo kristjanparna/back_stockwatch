@@ -25,6 +25,7 @@ public class UserManagementController {
     @PostMapping("/register")
     @Operation(summary = "Registreerimise teenus")
     public void register(@RequestBody RegisterRequest registerRequest) {
+        userManagementService.addContact(registerRequest);
         userManagementService.addUser(registerRequest);
     }
 }
