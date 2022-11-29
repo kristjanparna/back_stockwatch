@@ -56,11 +56,13 @@ public class UserManagementService {
     }
 
     public List<UserResponse> getUsersInfo() {
-        List<User> usersInfo = userService.getUsersInfo();
+        List<User> allUsers = userService.getUsersInfo();
         List<UserResponse> userResponses = new ArrayList<>();
-        for (User user : usersInfo) {
-            UserResponse userResponse = userMapper.userToUserResponse(user);
-            userResponses.add(userResponse);
+        for (User user : allUsers) {
+            if (user.getContact() != null) {
+                UserResponse userResponse = userMapper.userToUserResponse(user);
+                userResponses.add(userResponse);
+            }
         }
         return userResponses;
     }

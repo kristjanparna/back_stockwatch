@@ -14,6 +14,9 @@ import java.time.LocalDate;
 public class UserResponse implements Serializable {
     @Size(max = 50)
     @NotNull
+    private final String username;
+    @Size(max = 50)
+    @NotNull
     private final String firstname;
     @Size(max = 50)
     @NotNull
@@ -23,7 +26,5 @@ public class UserResponse implements Serializable {
     private final String email;
     @NotNull
     private final LocalDate startDate;
-    @Size(max = 50)
-    @NotNull
-    private final String username;
+
 }

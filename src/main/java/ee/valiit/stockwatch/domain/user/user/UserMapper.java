@@ -14,7 +14,7 @@ public interface UserMapper {
     @Mapping(source = "username", target = "username")
     LoginResponse toLoginResponse(User user);
 
-
+    @Mapping(source = "username", target = "username")
     @Mapping(source = "contact.firstName", target = "firstname")
     @Mapping(source = "contact.lastName", target = "lastname")
     @Mapping(source = "contact.email", target = "email")
