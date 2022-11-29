@@ -44,7 +44,7 @@ public class UserManagementService {
 
         Contact contact = contactMapper.registerRequestToContact(registerRequest);
         contact.setStart(LocalDate.now());
-        contact.setEnd(LocalDate.now());
+//        contact.setEnd(LocalDate.now());
         contactService.addContact(contact);
 
         User user = userMapper.registerRequestToUser(registerRequest);

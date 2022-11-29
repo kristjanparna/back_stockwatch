@@ -12,4 +12,6 @@ import java.io.Serializable;
 public class LoginResponse implements Serializable {
     private final Integer userId;
     private final Integer roleId;
+
+    private final String username;
 }
