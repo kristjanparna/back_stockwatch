@@ -1,7 +1,7 @@
 package ee.valiit.stockwatch.validation;
 
-import ee.valiit.stockwatch.infrastructure.exception.BusinessException;
 import ee.valiit.stockwatch.domain.user.user.User;
+import ee.valiit.stockwatch.infrastructure.exception.BusinessException;
 
 import java.util.List;
 import java.util.Optional;
@@ -23,5 +23,4 @@ public class Validation {
         }
     }
 
-    }
 }
