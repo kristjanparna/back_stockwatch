@@ -2,11 +2,12 @@ package ee.valiit.stockwatch.business.user;
 
 
 import ee.valiit.stockwatch.business.user.register.RegisterRequest;
-import ee.valiit.stockwatch.business.user.register.RegisterService;
+import ee.valiit.stockwatch.domain.user.user.UserResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @RestController
 public class UserManagementController {
@@ -27,4 +28,12 @@ public class UserManagementController {
     public void register(@RequestBody RegisterRequest registerRequest) {
         userManagementService.addUser(registerRequest);
     }
+
+    @GetMapping("/userinfo")
+    @Operation(summary = "Leiab kasutajate info admin paneeli tabelisse")
+    public List<UserResponse> getUsersInfo() {
+        List<UserResponse> usersInfo = userManagementService.getUsersInfo();
+        return usersInfo;
+    }
+
 }
