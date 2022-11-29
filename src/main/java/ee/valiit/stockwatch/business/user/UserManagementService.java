@@ -8,11 +8,14 @@ import ee.valiit.stockwatch.domain.user.role.Role;
 import ee.valiit.stockwatch.domain.user.role.RoleService;
 import ee.valiit.stockwatch.domain.user.user.User;
 import ee.valiit.stockwatch.domain.user.user.UserMapper;
+import ee.valiit.stockwatch.domain.user.user.UserResponse;
 import ee.valiit.stockwatch.domain.user.user.UserService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class UserManagementService {
@@ -50,5 +53,17 @@ public class UserManagementService {
         user.setRole(role);
         user.setContact(contact);
         userService.addUser(user);
+    }
+
+    public List<UserResponse> getUsersInfo() {
+        List<User> allUsers = userService.getUsersInfo();
+        List<UserResponse> userResponses = new ArrayList<>();
+        for (User user : allUsers) {
+            if (user.getContact() != null) {
+                UserResponse userResponse = userMapper.userToUserResponse(user);
+                userResponses.add(userResponse);
+            }
+        }
+        return userResponses;
     }
 }

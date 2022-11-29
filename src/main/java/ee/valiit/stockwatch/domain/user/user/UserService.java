@@ -24,4 +24,9 @@ public class UserService {
         Validation.validateUsernameExists(user, allUsers);
         userRepository.save(user);
     }
+
+    public List<User> getUsersInfo() {
+        List<User> allUsers = userRepository.findAll();
+        return allUsers;
+    }
 }
