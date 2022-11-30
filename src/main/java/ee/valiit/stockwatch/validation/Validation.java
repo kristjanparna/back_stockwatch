@@ -32,4 +32,11 @@ public class Validation {
         }
     }
 
+    public static void validateUserIsActive(User user) {
+        if (!user.getRole().getType().equals("admin")) {
+            if (user.getContact().getEnd() != null) {
+                throw new BusinessException(StockwatchError.INACTIVE_USER.getMessage(), StockwatchError.INACTIVE_USER.getErrorCode());
+            }
+        }
+    }
 }

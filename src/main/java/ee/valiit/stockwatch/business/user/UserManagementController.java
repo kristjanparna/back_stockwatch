@@ -7,6 +7,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -38,8 +39,10 @@ public class UserManagementController {
 
     @PutMapping("/remove")
     @Operation(summary = "Lisab kontakti tabelisse end date kuupäeva, kasutaja muutub mitteaktiivseks")
-    public void removeUser(String endDate, String username) {
-        System.out.println(endDate + " " + username);
+    public void deactivateUser(String username) {
+        userManagementService.deactivateUser(username);
+
+
         // todo:        saame kätte kasutajanime ja lõpu kuupäeva.
         //              kasutaja järgi leiame üles contactId ja lisame contact tabeli vastavale reale endDate'i
         //              contact tabelile saab ligi läbi User entity. Läbi UserManagementService kihi pöördume

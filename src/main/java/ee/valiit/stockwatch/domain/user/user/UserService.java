@@ -1,9 +1,13 @@
 package ee.valiit.stockwatch.domain.user.user;
 
+import ee.valiit.stockwatch.domain.user.contact.Contact;
 import ee.valiit.stockwatch.validation.Validation;
+import org.springframework.data.jpa.convert.threeten.Jsr310JpaConverters;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -28,5 +32,16 @@ public class UserService {
     public List<User> getUsersInfo() {
         List<User> allUsers = userRepository.findAll();
         return allUsers;
+    }
+
+    public void deactivateUser(String username) {
+        User user = userRepository.findUserByUsername(username);
+        user.getContact().setEnd(LocalDate.now());
+        userRepository.save(user);
+
+
+//        Contact contact = user.getContact();
+//        contact.setEnd(LocalDate.now());
+//        user.setContact(contact);
     }
 }

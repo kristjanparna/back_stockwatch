@@ -10,6 +10,7 @@ import ee.valiit.stockwatch.domain.user.user.User;
 import ee.valiit.stockwatch.domain.user.user.UserMapper;
 import ee.valiit.stockwatch.domain.user.user.UserResponse;
 import ee.valiit.stockwatch.domain.user.user.UserService;
+import ee.valiit.stockwatch.validation.Validation;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -38,8 +39,8 @@ public class UserManagementService {
 
     public LoginResponse login(String username, String password) {
         User user = userService.getValidUser(username, password);
-        LoginResponse loginResponse = userMapper.toLoginResponse(user);
-        return loginResponse;
+        Validation.validateUserIsActive(user);
+        return userMapper.toLoginResponse(user);
     }
 
     public void addUser(RegisterRequest registerRequest) {
@@ -65,5 +66,9 @@ public class UserManagementService {
             }
         }
         return userResponses;
+    }
+
+    public void deactivateUser(String username) {
+        userService.deactivateUser(username);
     }
 }

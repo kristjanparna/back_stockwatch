@@ -6,7 +6,8 @@ import lombok.Getter;
 public enum StockwatchError {
     INCORRECT_CREDENTIALS("Sellist kasutajanime või parooli ei leitud.", "001"),
     USERNAME_EXISTS("Selle nimega kasutaja on juba registreeritud, palun vali uus kasutajanimi.", "002"),
-    EMAIL_EXISTS("See meiliaadress on juba kasutusel.", "003");
+    EMAIL_EXISTS("See meiliaadress on juba kasutusel.", "003"),
+    INACTIVE_USER("See kasutaja on deaktiveeritud", "004");
 
     private final String message;
     private final String errorCode;
