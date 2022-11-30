@@ -1,4 +1,4 @@
-package ee.valiit.stockwatch.domain.instrument;
+package ee.valiit.stockwatch.domain.instrument.instrument;
 
 import lombok.Getter;
 import lombok.Setter;

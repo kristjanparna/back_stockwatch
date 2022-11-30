@@ -1,4 +1,4 @@
-package ee.valiit.stockwatch.business.instrument.watchlist;
+package ee.valiit.stockwatch.domain.instrument.ticker;
 
 import lombok.Data;
 
@@ -6,4 +6,5 @@ import lombok.Data;
 public class Quote {
     private String shortname;
     private String symbol;
+    private String exchDisp;
 }

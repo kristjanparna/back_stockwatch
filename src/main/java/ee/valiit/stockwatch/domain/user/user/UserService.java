@@ -1,13 +1,10 @@
 package ee.valiit.stockwatch.domain.user.user;
 
-import ee.valiit.stockwatch.domain.user.contact.Contact;
 import ee.valiit.stockwatch.validation.Validation;
-import org.springframework.data.jpa.convert.threeten.Jsr310JpaConverters;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
