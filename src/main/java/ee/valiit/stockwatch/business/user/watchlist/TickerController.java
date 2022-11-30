@@ -1,9 +1,10 @@
 package ee.valiit.stockwatch.business.user.watchlist;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import ee.valiit.stockwatch.business.user.HttpSettings;
 import io.swagger.v3.oas.annotations.Operation;
-import org.springframework.http.*;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
