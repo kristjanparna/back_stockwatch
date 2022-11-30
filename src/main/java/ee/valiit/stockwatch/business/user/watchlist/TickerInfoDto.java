@@ -5,8 +5,6 @@ import lombok.Data;
 import java.util.List;
 
 @Data
-public class TickerInfo {
-
+public class TickerInfoDto {
     private List<Quote> quotes;
-
 }
