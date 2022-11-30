@@ -59,7 +59,7 @@ public class UserManagementService {
         List<User> allUsers = userService.getUsersInfo();
         List<UserResponse> userResponses = new ArrayList<>();
         for (User user : allUsers) {
-            if (!user.getRole().getType().equals("admin")) {
+            if (user.getContact() != null) {
                 UserResponse userResponse = userMapper.userToUserResponse(user);
                 userResponses.add(userResponse);
             }
