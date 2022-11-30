@@ -39,14 +39,7 @@ public class UserManagementController {
     @PutMapping("/remove")
     @Operation(summary = "Lisab kontakti tabelisse end date kuupäeva, kasutaja muutub mitteaktiivseks")
     public void removeUser(String endDate, String username) {
-        System.out.println(endDate + " " + username);
-        // todo:        saame kätte kasutajanime ja lõpu kuupäeva.
-        //              kasutaja järgi leiame üles contactId ja lisame contact tabeli vastavale reale endDate'i
-        //              contact tabelile saab ligi läbi User entity. Läbi UserManagementService kihi pöördume
-        //              UserService poole kust saame ligi UserRepositoryle
 
-        // todo:        kasutaja lõplikuks eemaldamiseks on vaja ka user tabelisse lõpukuupäeva, muidu saab endiselt
-        //              sisse logida. Äkki saab userValidationisse panna lisaks ühe tingimuse - sisse saab logida,
-        //              kui endDate != null
     }
+
 }
