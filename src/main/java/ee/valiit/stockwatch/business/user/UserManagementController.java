@@ -1,6 +1,7 @@
 package ee.valiit.stockwatch.business.user;
 
 
+import ee.valiit.stockwatch.business.user.login.LoginResponse;
 import ee.valiit.stockwatch.business.user.register.RegisterRequest;
 import ee.valiit.stockwatch.domain.user.user.UserResponse;
 import io.swagger.v3.oas.annotations.Operation;

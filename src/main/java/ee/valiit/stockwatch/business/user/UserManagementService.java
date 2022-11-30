@@ -1,5 +1,6 @@
 package ee.valiit.stockwatch.business.user;
 
+import ee.valiit.stockwatch.business.user.login.LoginResponse;
 import ee.valiit.stockwatch.business.user.register.RegisterRequest;
 import ee.valiit.stockwatch.domain.user.contact.Contact;
 import ee.valiit.stockwatch.domain.user.contact.ContactMapper;

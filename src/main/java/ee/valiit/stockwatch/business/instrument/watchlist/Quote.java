@@ -1,4 +1,4 @@
-package ee.valiit.stockwatch.business.user.watchlist;
+package ee.valiit.stockwatch.business.instrument.watchlist;
 
 import lombok.Data;
 

@@ -12,7 +12,9 @@ public class HttpSettings {
     public static final String API_KEY_VALUE = "7a67d740b4msh283926433a855f7p19cfe5jsnd8f8a1d93c85";
     public static final String API_HOST_VALUE = "apidojo-yahoo-finance-v1.p.rapidapi.com";
     public static final String BASE_URL = "https://apidojo-yahoo-finance-v1.p.rapidapi.com";
+    public static final String BASE_URL_SEARCH = "https://apidojo-yahoo-finance-v1.p.rapidapi.com/stock/v2";
     public static final String TICKER_PREFIX = "/auto-complete?q=";
+    public static final String TICKER_PREFIX_SEARCH = "/get-profile?symbol=";
     public static final String REGION = "&region=US";
 
     public static HttpHeaders createRapidApiHeaders() {

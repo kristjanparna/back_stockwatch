@@ -1,4 +1,4 @@
-package ee.valiit.stockwatch.business.user;
+package ee.valiit.stockwatch.business.user.login;
 
 import ee.valiit.stockwatch.domain.user.user.User;
 import lombok.Data;
