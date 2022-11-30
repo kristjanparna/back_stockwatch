@@ -38,8 +38,8 @@ public class UserManagementController {
 
     @PutMapping("/remove")
     @Operation(summary = "Lisab kontakti tabelisse end date kuupäeva, kasutaja muutub mitteaktiivseks")
-    public void removeUser(String endDate, String username) {
-
+    public void removeUser(String username) {
+        userManagementService.deactivateUser(username);
     }
 
 }

@@ -36,12 +36,8 @@ public class UserService {
 
     public void deactivateUser(String username) {
         User user = userRepository.findUserByUsername(username);
+        Validation.validateUserIsActive(user);
         user.getContact().setEnd(LocalDate.now());
         userRepository.save(user);
-
-
-//        Contact contact = user.getContact();
-//        contact.setEnd(LocalDate.now());
-//        user.setContact(contact);
     }
 }

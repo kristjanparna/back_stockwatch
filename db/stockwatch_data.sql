@@ -14,5 +14,3 @@ INSERT INTO public."user" (id, role_id, contact_id, username, password)
 VALUES (DEFAULT, 2, 1, 'Andres', '123');
 INSERT INTO public."user" (id, role_id, contact_id, username, password)
 VALUES (DEFAULT, 2, 2, 'Kristjan', '123');
-
-
