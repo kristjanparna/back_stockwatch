@@ -1,5 +1,6 @@
 package ee.valiit.stockwatch.validation;
 
+import ee.valiit.stockwatch.domain.instrument.instrument.Instrument;
 import ee.valiit.stockwatch.domain.user.contact.Contact;
 import ee.valiit.stockwatch.domain.user.user.User;
 import ee.valiit.stockwatch.infrastructure.exception.BusinessException;
@@ -37,6 +38,14 @@ public class Validation {
             throw new BusinessException(StockwatchError.CANNOT_DEACTIVATE_ADMIN.getMessage(), StockwatchError.CANNOT_DEACTIVATE_ADMIN.getErrorCode());
         } else if (user.getContact().getEnd() != null) {
             throw new BusinessException(StockwatchError.INACTIVE_USER.getMessage(), StockwatchError.INACTIVE_USER.getErrorCode());
+        }
+    }
+
+    public static void validateTickerExists(List<Instrument> allInstruments, String ticker) {
+        for (Instrument instrument : allInstruments) {
+            if (instrument.getTicker().equals(ticker)) {
+                throw new BusinessException(StockwatchError.TICKER_EXISTS.getMessage(), StockwatchError.TICKER_EXISTS.getErrorCode());
+            }
         }
     }
 }

@@ -9,7 +9,6 @@ import org.mapstruct.ReportingPolicy;
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = "spring")
 public interface WatchlistMapper {
     @Mapping(source = "userId", target = "user.id")
-    @Mapping(source = "instrumentId", target = "instrument.id")
     Watchlist watchlistRequestToWatchlist(WatchlistRequest watchlistRequest);
 
 }

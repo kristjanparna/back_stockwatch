@@ -30,8 +30,8 @@ public class InstrumentController {
 
     @GetMapping(value = "/search", produces = "application/json")
     @Operation(summary = "Tagastab konkreetse instrumendi info välisest API'st")
-    public InstrumentResponse getInstrument(String ticker) {
-        InstrumentResponse instrumentResponse = instrumentService.getInstrumentByTicker(ticker);
+    public InstrumentResponse getInstrument(String symbol) {
+        InstrumentResponse instrumentResponse = instrumentService.getInstrumentByTicker(symbol);
         return instrumentResponse;
     }
 }

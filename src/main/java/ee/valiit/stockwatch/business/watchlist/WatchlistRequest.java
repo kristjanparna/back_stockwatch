@@ -18,12 +18,10 @@ import java.util.Date;
 public class WatchlistRequest implements Serializable {
     private String ticker;
     private Integer userId;
-    private Integer instrumentId;
     private BigDecimal priceHigher;
     private BigDecimal priceLower;
     @Size(max = 255)
     private String userComment;
     @NotNull
     private BigDecimal priceAtAddition;
-    private LocalDate additionDate = null;
 }

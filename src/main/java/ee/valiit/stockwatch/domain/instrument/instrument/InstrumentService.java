@@ -11,6 +11,8 @@ import org.springframework.web.client.RestTemplate;
 
 import javax.annotation.Resource;
 
+import java.util.List;
+
 import static ee.valiit.stockwatch.business.user.HttpSettings.*;
 
 @Service
@@ -49,9 +51,19 @@ public class InstrumentService {
 
     public void addNewInstrument(String ticker) {
         Instrument instrument = new Instrument();
+        List<Instrument> allInstruments = findAllInstruments();
+        Validation.validateTickerExists(allInstruments, ticker);
         instrument.setTicker(ticker);
+
         instrumentRepository.save(instrument);
     }
+
+    public List<Instrument> findAllInstruments() {
+        List<Instrument> allInstruments = instrumentRepository.findAll();
+        return allInstruments;
+    }
+
+
 
     public Instrument findInstrumentByTicker(String ticker) {
         for (Instrument instrument : instrumentRepository.findAll()) {
