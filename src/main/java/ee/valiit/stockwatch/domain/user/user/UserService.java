@@ -37,4 +37,14 @@ public class UserService {
         user.getContact().setEnd(LocalDate.now());
         userRepository.save(user);
     }
+
+    public User findUserById(Integer userId) {
+        List<User> allUsers = userRepository.findAll();
+        for (User user : allUsers) {
+            if (user.getId().equals(userId)) {
+                return user;
+            }
+        }
+        return null;
+    }
 }

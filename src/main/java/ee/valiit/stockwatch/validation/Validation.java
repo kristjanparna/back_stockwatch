@@ -48,4 +48,11 @@ public class Validation {
             }
         }
     }
+    public static void validateTickerNotInWatchlist(List<Instrument> allInstruments, String ticker) {
+        for (Instrument instrument : allInstruments) {
+            if (instrument.getTicker().equals(ticker)) {
+                throw new BusinessException(StockwatchError.TICKER_IN_WATCHLIST.getMessage(), StockwatchError.TICKER_IN_WATCHLIST.getErrorCode());
+            }
+        }
+    }
 }

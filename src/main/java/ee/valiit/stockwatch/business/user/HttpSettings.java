@@ -9,7 +9,7 @@ public class HttpSettings {
 
     public static final String API_KEY = "X-RapidAPI-Key";
     public static final String API_HOST = "X-RapidAPI-Host";
-    public static final String API_KEY_VALUE = "7a67d740b4msh283926433a855f7p19cfe5jsnd8f8a1d93c85";
+    public static final String API_KEY_VALUE = "6e6658dd03mshc68417bf7b6dbddp199189jsn48fdcd410570";
     public static final String API_HOST_VALUE = "apidojo-yahoo-finance-v1.p.rapidapi.com";
     public static final String BASE_URL = "https://apidojo-yahoo-finance-v1.p.rapidapi.com";
     public static final String BASE_URL_SEARCH = "https://apidojo-yahoo-finance-v1.p.rapidapi.com/stock/v2";

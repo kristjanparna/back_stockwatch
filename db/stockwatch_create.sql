@@ -1,5 +1,5 @@
 -- Created by Vertabelo (http://vertabelo.com)
--- Last modification date: 2022-11-28 07:29:59.589
+-- Last modification date: 2022-12-01 09:20:37.688
 
 -- tables
 -- Table: contact
@@ -8,7 +8,7 @@ CREATE TABLE contact (
                          first_name varchar(50)  NOT NULL,
                          last_name varchar(50)  NOT NULL,
                          email varchar(255)  NOT NULL,
-                         start date  NOT NULL DEFAULT now(),
+                         start date  NOT NULL DEFAULT NOW(),
                          "end" date  NULL,
                          CONSTRAINT contact_pk PRIMARY KEY (id)
 );
@@ -29,7 +29,7 @@ CREATE TABLE portfolio (
                            purchase_price decimal(6,2)  NOT NULL,
                            amount int  NOT NULL,
                            transaction_fee decimal(4,2)  NULL,
-                           purchase_date date  NOT NULL DEFAULT now(),
+                           purchase_date date  NOT NULL DEFAULT NOW(),
                            CONSTRAINT portfolio_pk PRIMARY KEY (id)
 );
 
@@ -47,7 +47,7 @@ CREATE TABLE transaction (
                              transaction_type_id int  NOT NULL,
                              amount int  NOT NULL,
                              price decimal(6,2)  NOT NULL,
-                             date date  NOT NULL DEFAULT now(),
+                             date date  NOT NULL DEFAULT NOW(),
                              CONSTRAINT transaction_pk PRIMARY KEY (id)
 );
 
@@ -78,7 +78,7 @@ CREATE TABLE watchlist (
                            price_lower decimal(6,2)  NULL,
                            user_comment varchar(255)  NULL,
                            price_at_addition decimal(6,2)  NOT NULL,
-                           addition_date date  NOT NULL DEFAULT now(),
+                           addition_date date  NOT NULL DEFAULT NOW(),
                            CONSTRAINT watchlist_pk PRIMARY KEY (id)
 );
 

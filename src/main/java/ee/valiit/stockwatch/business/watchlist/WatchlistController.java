@@ -13,7 +13,7 @@ public class WatchlistController {
     @Resource
     private WatchlistService watchlistService;
 
-    @PostMapping(value = "/watchlist")
+    @PostMapping(value = "/watchlist/add")
     @Operation(summary = "Lisab kasutaja valitud instrumendi watchlisti")
     public void addInstrumentToWatchlist(WatchlistRequest request) {
         watchlistService.addInstrumentToWatchlist(request);

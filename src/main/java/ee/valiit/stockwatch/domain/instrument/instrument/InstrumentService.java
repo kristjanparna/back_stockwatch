@@ -2,6 +2,8 @@ package ee.valiit.stockwatch.domain.instrument.instrument;
 
 import ee.valiit.stockwatch.business.instrument.instrument.InstrumentInfo;
 import ee.valiit.stockwatch.business.user.HttpSettings;
+import ee.valiit.stockwatch.domain.user.user.User;
+import ee.valiit.stockwatch.domain.user.user.UserService;
 import ee.valiit.stockwatch.validation.Validation;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -23,6 +25,9 @@ public class InstrumentService {
 
     @Resource
     private InstrumentRepository instrumentRepository;
+
+    @Resource
+    private UserService userService;
 
     public InstrumentResponse getInstrumentByTicker(String ticker) {
         HttpHeaders headers = HttpSettings.createRapidApiHeaders();
@@ -53,8 +58,9 @@ public class InstrumentService {
         Instrument instrument = new Instrument();
         List<Instrument> allInstruments = findAllInstruments();
         Validation.validateTickerExists(allInstruments, ticker);
-        instrument.setTicker(ticker);
 
+
+        instrument.setTicker(ticker);
         instrumentRepository.save(instrument);
     }
 
@@ -62,8 +68,6 @@ public class InstrumentService {
         List<Instrument> allInstruments = instrumentRepository.findAll();
         return allInstruments;
     }
-
-
 
     public Instrument findInstrumentByTicker(String ticker) {
         for (Instrument instrument : instrumentRepository.findAll()) {
