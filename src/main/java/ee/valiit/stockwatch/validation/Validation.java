@@ -34,9 +34,7 @@ public class Validation {
     }
 
     public static void validateUserIsActive(User user) {
-        if (user.getRole().getType().equals("admin")) {
-            throw new BusinessException(StockwatchError.CANNOT_DEACTIVATE_ADMIN.getMessage(), StockwatchError.CANNOT_DEACTIVATE_ADMIN.getErrorCode());
-        } else if (user.getContact().getEnd() != null) {
+        if (!user.getRole().getType().equals("admin") && user.getContact().getEnd() != null) {
             throw new BusinessException(StockwatchError.INACTIVE_USER.getMessage(), StockwatchError.INACTIVE_USER.getErrorCode());
         }
     }
