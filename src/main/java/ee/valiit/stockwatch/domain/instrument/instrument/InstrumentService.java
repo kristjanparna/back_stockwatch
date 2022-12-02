@@ -2,7 +2,6 @@ package ee.valiit.stockwatch.domain.instrument.instrument;
 
 import ee.valiit.stockwatch.business.instrument.instrument.InstrumentInfo;
 import ee.valiit.stockwatch.business.user.HttpSettings;
-import ee.valiit.stockwatch.domain.user.user.User;
 import ee.valiit.stockwatch.domain.user.user.UserService;
 import ee.valiit.stockwatch.validation.Validation;
 import org.springframework.http.HttpEntity;
@@ -12,10 +11,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import javax.annotation.Resource;
-
 import java.util.List;
 
-import static ee.valiit.stockwatch.business.user.HttpSettings.*;
+import static ee.valiit.stockwatch.business.user.HttpSettings.BASE_URL_SEARCH;
+import static ee.valiit.stockwatch.business.user.HttpSettings.TICKER_PREFIX_SEARCH;
 
 @Service
 public class InstrumentService {
@@ -26,8 +25,6 @@ public class InstrumentService {
     @Resource
     private InstrumentRepository instrumentRepository;
 
-    @Resource
-    private UserService userService;
 
     public InstrumentResponse getInstrumentByTicker(String ticker) {
         HttpHeaders headers = HttpSettings.createRapidApiHeaders();
@@ -36,7 +33,6 @@ public class InstrumentService {
                 new HttpEntity<>(headers),
                 InstrumentInfo.class
         ).getBody();
-
         InstrumentResponse instrumentResponse = instrumentToInstrumentResponse(instrument);
 
         return instrumentResponse;

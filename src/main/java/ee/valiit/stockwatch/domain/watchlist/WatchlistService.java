@@ -1,8 +1,8 @@
 package ee.valiit.stockwatch.domain.watchlist;
 
-import ee.valiit.stockwatch.business.watchlist.AddWatchlistRequest;
 import ee.valiit.stockwatch.business.watchlist.WatchlistRequest;
 import ee.valiit.stockwatch.domain.instrument.instrument.Instrument;
+import ee.valiit.stockwatch.domain.instrument.instrument.InstrumentResponse;
 import ee.valiit.stockwatch.domain.instrument.instrument.InstrumentService;
 import ee.valiit.stockwatch.domain.user.user.User;
 import ee.valiit.stockwatch.domain.user.user.UserService;
@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -29,28 +30,52 @@ public class WatchlistService {
     private UserService userService;
 
 
-    public WatchlistResponse getWatchlistData(Integer userId) {
-        Watchlist watchlist = watchlistRepository.findByUserId(userId);
-        WatchlistResponse response = new WatchlistResponse();
-        response.setWatchlist(watchlist);
-
-        Watchlist usersWatchlist = watchlistRepository.findByUserId(userId);
-
-
-        return null;
+    public List<WatchlistResponse> getWatchlistData(Integer userId) {
+        List<Watchlist> watchlists = watchlistRepository.findAllByUserId(userId);
+        List<WatchlistResponse> responseList = combineWatchlistResponse(watchlists);
+        return responseList;
     }
 
-    public void addInstrumentToWatchlist(AddWatchlistRequest request) {
+    private List<WatchlistResponse> combineWatchlistResponse(List<Watchlist> watchlists) {
+        List<WatchlistResponse> responseList = new ArrayList<>();
+        for (Watchlist watchlist : watchlists) {
+            WatchlistResponse response = watchlistToWatchlistResponse(watchlist);
+            instrumentToWatchlistResonse(watchlist, response);
+            responseList.add(response);
+        }
+        return responseList;
+    }
+
+    private void instrumentToWatchlistResonse(Watchlist watchlist, WatchlistResponse response) {
+        InstrumentResponse instrument = instrumentService.getInstrumentByTicker(watchlist.getInstrument().getTicker());
+        response.setCurrency(instrument.getCurrency());
+        response.setCurrentPrice(instrument.getCurrentPrice());
+        response.setTicker(instrument.getTicker());
+        response.setPriceChangePercentage(instrument.getPriceChangePercentage());
+        response.setShortName(instrument.getShortName());
+    }
+
+    private static WatchlistResponse watchlistToWatchlistResponse(Watchlist watchlist) {
+        WatchlistResponse response = new WatchlistResponse();
+        response.setAdditionDate(watchlist.getAdditionDate());
+        response.setPriceHigher(watchlist.getPriceHigher());
+        response.setPriceLower(watchlist.getPriceLower());
+        response.setPriceAtAddition(watchlist.getPriceAtAddition());
+        response.setUserComment(watchlist.getUserComment());
+        return response;
+    }
+
+    public void addInstrumentToWatchlist(WatchlistRequest request) {
         Instrument instrument = new Instrument();
         List<Instrument> allInstruments = instrumentService.findAllInstruments();
         instrument = checkIfInstrumentExists(request, instrument, allInstruments);
-        Watchlist watchlist = watchlistMapper.addWatchlistRequestToWatchlist(request);
+        Watchlist watchlist = watchlistMapper.watchlistRequestToWatchlist(request);
         createNewWatchlistItem(request, instrument, allInstruments, watchlist);
 
         watchlistRepository.save(watchlist);
     }
 
-    private void createNewWatchlistItem(AddWatchlistRequest request, Instrument instrument, List<Instrument> allInstruments, Watchlist watchlist) {
+    private void createNewWatchlistItem(WatchlistRequest request, Instrument instrument, List<Instrument> allInstruments, Watchlist watchlist) {
         User user = userService.findUserById(request.getUserId());
         watchlist.setUser(user);
         watchlist.setAdditionDate(LocalDate.now());
@@ -58,7 +83,7 @@ public class WatchlistService {
         validateInstrumentNotInWatchlist(request, allInstruments);
     }
 
-    private void validateInstrumentNotInWatchlist(AddWatchlistRequest request, List<Instrument> allInstruments) {
+    private void validateInstrumentNotInWatchlist(WatchlistRequest request, List<Instrument> allInstruments) {
         List<Watchlist> allWatchlistItems = watchlistRepository.findAll();
         for (Watchlist watchlistItem : allWatchlistItems) {
             if (watchlistItem.getUser().getId().equals(request.getUserId())
@@ -68,7 +93,7 @@ public class WatchlistService {
         }
     }
 
-    private Instrument checkIfInstrumentExists(AddWatchlistRequest request, Instrument instrument, List<Instrument> allInstruments) {
+    private Instrument checkIfInstrumentExists(WatchlistRequest request, Instrument instrument, List<Instrument> allInstruments) {
         for (Instrument existingInstrument : allInstruments) {
             if (existingInstrument.getTicker().equals(request.getTicker())) {
                 instrument = existingInstrument;
@@ -80,7 +105,7 @@ public class WatchlistService {
         return instrument;
     }
 
-    private Instrument addInstrument(AddWatchlistRequest request) {
+    private Instrument addInstrument(WatchlistRequest request) {
         Instrument instrument;
         instrumentService.addNewInstrument(request.getTicker());
         instrument = instrumentService.findInstrumentByTicker(request.getTicker());

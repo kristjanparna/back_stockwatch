@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @RestController
 public class WatchlistController {
@@ -17,14 +18,14 @@ public class WatchlistController {
 
     @PostMapping(value = "/watchlist")
     @Operation(summary = "Lisab kasutaja valitud instrumendi watchlisti")
-    public void addInstrumentToWatchlist(@RequestBody AddWatchlistRequest request) {
+    public void addInstrumentToWatchlist(@RequestBody WatchlistRequest request) {
         watchlistManagementService.addInstrumentToWatchlist(request);
     }
 
 
     @GetMapping(value = "/watchlist")
     @Operation(summary = "Tagastab kogu kasutaja watchlisti info")
-    public WatchlistResponse getWatchlistData(Integer userId) {
+    public List<WatchlistResponse> getWatchlistData(Integer userId) {
         return watchlistManagementService.getWatchlistData(userId);
     }
 }

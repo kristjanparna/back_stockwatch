@@ -3,9 +3,9 @@ package ee.valiit.stockwatch.business.watchlist;
 import ee.valiit.stockwatch.domain.watchlist.WatchlistResponse;
 import ee.valiit.stockwatch.domain.watchlist.WatchlistService;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @Service
 public class WatchlistManagementService {
@@ -13,11 +13,11 @@ public class WatchlistManagementService {
     @Resource
     private WatchlistService watchlistService;
 
-    public void addInstrumentToWatchlist(AddWatchlistRequest request) {
+    public void addInstrumentToWatchlist(WatchlistRequest request) {
         watchlistService.addInstrumentToWatchlist(request);
     }
 
-    public WatchlistResponse getWatchlistData(Integer userId) {
+    public List<WatchlistResponse> getWatchlistData(Integer userId) {
         return watchlistService.getWatchlistData(userId);
     }
 }

@@ -9,6 +9,7 @@ import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.List;
 
 /**
  * A DTO for the {@link Watchlist} entity
@@ -16,6 +17,14 @@ import java.time.LocalDate;
 
 @Data
 public class WatchlistResponse implements Serializable {
-    private Watchlist watchlist;
-    private InstrumentResponse instrumentResponse;
+    private String ticker;
+    private String shortName;
+    private String currency;
+    private Double currentPrice;
+    private Double priceChangePercentage;
+    private BigDecimal priceHigher;
+    private BigDecimal priceLower;
+    private String userComment;
+    private BigDecimal priceAtAddition;
+    private LocalDate additionDate;
 }
