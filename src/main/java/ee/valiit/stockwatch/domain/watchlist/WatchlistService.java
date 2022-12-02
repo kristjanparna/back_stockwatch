@@ -31,8 +31,8 @@ public class WatchlistService {
 
 
     public List<WatchlistResponse> getWatchlistData(Integer userId) {
-        List<Watchlist> watchlists = watchlistRepository.findAllByUserId(userId);
-        List<WatchlistResponse> responseList = combineWatchlistResponse(watchlists);
+        List<Watchlist> userWatchlists = watchlistRepository.findAllByUserId(userId);
+        List<WatchlistResponse> responseList = combineWatchlistResponse(userWatchlists);
         return responseList;
     }
 
@@ -40,13 +40,13 @@ public class WatchlistService {
         List<WatchlistResponse> responseList = new ArrayList<>();
         for (Watchlist watchlist : watchlists) {
             WatchlistResponse response = watchlistToWatchlistResponse(watchlist);
-            instrumentToWatchlistResonse(watchlist, response);
+            instrumentToWatchlistResponse(watchlist, response);
             responseList.add(response);
         }
         return responseList;
     }
 
-    private void instrumentToWatchlistResonse(Watchlist watchlist, WatchlistResponse response) {
+    private void instrumentToWatchlistResponse(Watchlist watchlist, WatchlistResponse response) {
         InstrumentResponse instrument = instrumentService.getInstrumentByTicker(watchlist.getInstrument().getTicker());
         response.setCurrency(instrument.getCurrency());
         response.setCurrentPrice(instrument.getCurrentPrice());
