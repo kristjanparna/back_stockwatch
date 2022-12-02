@@ -1,7 +1,6 @@
 package ee.valiit.stockwatch.domain.user.contact;
 
 
-import ee.valiit.stockwatch.business.user.register.RegisterRequest;
 import ee.valiit.stockwatch.validation.Validation;
 import org.springframework.stereotype.Service;
 

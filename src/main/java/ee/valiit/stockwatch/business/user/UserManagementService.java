@@ -72,4 +72,9 @@ public class UserManagementService {
     public void deactivateUser(String username) {
         userService.deactivateUser(username);
     }
+
+    public void editUser(String username, String email) {
+        userService.editUser(username, email);
+
+    }
 }

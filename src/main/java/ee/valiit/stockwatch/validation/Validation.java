@@ -33,6 +33,14 @@ public class Validation {
         }
     }
 
+    public static void validateEmailExists(String email, List<Contact> contacts) {
+        for (Contact contact : contacts) {
+            if (email.equals(contact.getEmail())) {
+                throw new BusinessException(StockwatchError.EMAIL_EXISTS.getMessage(), StockwatchError.EMAIL_EXISTS.getErrorCode());
+            }
+        }
+    }
+
     public static void validateUserIsActive(User user) {
         if (!user.getRole().getType().equals("admin") && user.getContact().getEnd() != null) {
             throw new BusinessException(StockwatchError.INACTIVE_USER.getMessage(), StockwatchError.INACTIVE_USER.getErrorCode());
@@ -46,6 +54,7 @@ public class Validation {
             }
         }
     }
+
     public static void validateTickerNotInWatchlist(List<Instrument> allInstruments, String ticker) {
         for (Instrument instrument : allInstruments) {
             if (instrument.getTicker().equals(ticker)) {

@@ -1,5 +1,7 @@
 package ee.valiit.stockwatch.domain.user.user;
 
+import ee.valiit.stockwatch.domain.user.contact.Contact;
+import ee.valiit.stockwatch.domain.user.contact.ContactRepository;
 import ee.valiit.stockwatch.validation.Validation;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +15,9 @@ public class UserService {
 
     @Resource
     private UserRepository userRepository;
+
+    @Resource
+    private ContactRepository contactRepository;
 
     public User getValidUser(String username, String password) {
         Optional<User> userOptional = userRepository.findUserBy(username, password);
@@ -46,5 +51,13 @@ public class UserService {
             }
         }
         return null;
+    }
+
+    public void editUser(String username, String email) {
+        User user = userRepository.findUserByUsername(username);
+        List<Contact> contacts = contactRepository.findAll();
+        Validation.validateEmailExists(email, contacts);
+        user.getContact().setEmail(email);
+        userRepository.save(user);
     }
 }

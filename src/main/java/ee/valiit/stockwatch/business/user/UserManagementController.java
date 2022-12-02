@@ -5,6 +5,8 @@ import ee.valiit.stockwatch.business.user.login.LoginResponse;
 import ee.valiit.stockwatch.business.user.register.RegisterRequest;
 import ee.valiit.stockwatch.domain.user.user.UserResponse;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -41,6 +43,18 @@ public class UserManagementController {
     @Operation(summary = "Lisab kontakti tabelisse end date kuupäeva, kasutaja muutub mitteaktiivseks")
     public void removeUser(String username) {
         userManagementService.deactivateUser(username);
+    }
+
+    @PutMapping("/userinfo")
+    @Operation(summary = "Muudab kasutaja kontaktinfot")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Muudab kasutaja kontaktandmetes e-posti aadressi"),
+            @ApiResponse(responseCode = "403", description = "Sisestatud e-posti aadress on juba kasutuses")
+
+    })
+    public String editUser(@RequestParam String username, @RequestParam String email) {
+        userManagementService.editUser(username, email);
+        return "E-post muudetud";
     }
 
 }
