@@ -5,13 +5,18 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.annotation.Resource;
+
 @RestController
 public class PortfolioController {
 
+    @Resource
+    public PortfolioManagementService portfolioManagementService;
 
     @PostMapping("portfolio")
     @Operation(summary = "Lisab instrumenti portfelli")
     public void addTickerToPortfolio(@RequestBody PortfolioRequest portfolioRequest) {
+        portfolioManagementService.addToPortfolio(portfolioRequest);
 
     }
 
