@@ -111,5 +111,4 @@ public class WatchlistService {
         instrument = instrumentService.findInstrumentByTicker(request.getTicker());
         return instrument;
     }
-
 }

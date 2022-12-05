@@ -60,9 +60,10 @@ public class PortfolioService {
         for (Instrument existingInstrument : allInstruments) {
             if (existingInstrument.getTicker().equals(portfolioRequest.getTicker())) {
                 instrument = existingInstrument;
-            } else {
-                instrument = addInstrument(portfolioRequest);
             }
+        }
+        if (instrument.getTicker() == null) {
+            instrument = addInstrument(portfolioRequest);
         }
         return instrument;
     }
