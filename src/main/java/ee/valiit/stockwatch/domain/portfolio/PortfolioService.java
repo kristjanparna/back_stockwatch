@@ -6,7 +6,6 @@ import ee.valiit.stockwatch.domain.instrument.instrument.Instrument;
 import ee.valiit.stockwatch.domain.instrument.instrument.InstrumentService;
 import ee.valiit.stockwatch.domain.user.user.User;
 import ee.valiit.stockwatch.domain.user.user.UserService;
-import ee.valiit.stockwatch.validation.Validation;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -43,17 +42,6 @@ public class PortfolioService {
         portfolio.setUser(user);
         portfolio.setPurchaseDate(LocalDate.now());
         portfolio.setInstrument(instrument);
-        validateInstrumentNotInPortfolio(portfolioRequest, allInstruments);
-    }
-
-    private void validateInstrumentNotInPortfolio(PortfolioRequest portfolioRequest, List<Instrument> allInstruments) {
-        List<Portfolio> allPortfolioItems = portfolioRepository.findAll();
-        for (Portfolio portfolioItem : allPortfolioItems) {
-            if (portfolioItem.getUser().getId().equals(portfolioRequest.getUserId())
-            && portfolioItem.getInstrument().getTicker().equals(portfolioRequest.getTicker())) {
-                Validation.validateTickerNotInPortfolio(allInstruments, portfolioRequest.getTicker());
-            }
-        }
     }
 
     private Instrument checkIfInstrumentExists(PortfolioRequest portfolioRequest, Instrument instrument, List<Instrument> allInstruments) {
