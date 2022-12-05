@@ -18,7 +18,7 @@ public class PortfolioRequest implements Serializable {
     private Integer userId;
     @Size(max = 255)
     @NotNull
-    private String instrumentTicker;
+    private String ticker;
     @NotNull
     private BigDecimal purchasePrice;
     @NotNull

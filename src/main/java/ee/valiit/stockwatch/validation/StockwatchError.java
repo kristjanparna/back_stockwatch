@@ -10,7 +10,11 @@ public enum StockwatchError {
     INACTIVE_USER("See kasutaja on deaktiveeritud", "004"),
     CANNOT_DEACTIVATE_ADMIN("Administraatori kontot ei saa deaktiveerida", "005"),
     TICKER_EXISTS("Ühte instrumenti ei saa tabelisse kaks korda lisada", "006"),
-    TICKER_IN_WATCHLIST("See instrument on juba lisatud sinu nimekirja", "007");
+    TICKER_IN_WATCHLIST("See instrument on juba lisatud sinu nimekirja", "007"),
+
+    TICKER_IN_PORTFOLIO("See insturment on juba lisatud sinu portfelli", "008");
+
+
 
     private final String message;
     private final String errorCode;

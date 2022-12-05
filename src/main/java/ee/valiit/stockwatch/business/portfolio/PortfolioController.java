@@ -17,7 +17,5 @@ public class PortfolioController {
     @Operation(summary = "Lisab instrumenti portfelli")
     public void addTickerToPortfolio(@RequestBody PortfolioRequest portfolioRequest) {
         portfolioManagementService.addToPortfolio(portfolioRequest);
-
     }
-
 }

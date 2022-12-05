@@ -112,5 +112,4 @@ public class WatchlistService {
         return instrument;
     }
 
-
 }

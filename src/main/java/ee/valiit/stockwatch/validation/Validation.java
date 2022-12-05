@@ -62,4 +62,12 @@ public class Validation {
             }
         }
     }
+
+    public static void validateTickerNotInPortfolio(List<Instrument> allInstruments, String ticker) {
+        for (Instrument instrument : allInstruments) {
+            if (instrument.getTicker().equals(ticker)) {
+                throw new BusinessException(StockwatchError.TICKER_IN_PORTFOLIO.getMessage(), StockwatchError.TICKER_IN_PORTFOLIO.getErrorCode());
+            }
+        }
+    }
 }
