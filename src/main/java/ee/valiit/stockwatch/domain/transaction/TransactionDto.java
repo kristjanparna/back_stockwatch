@@ -1,4 +1,4 @@
-package ee.valiit.stockwatch.domain.portfolio.transaction;
+package ee.valiit.stockwatch.domain.transaction;
 
 import lombok.Data;
 

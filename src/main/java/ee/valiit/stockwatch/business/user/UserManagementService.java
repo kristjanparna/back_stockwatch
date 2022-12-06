@@ -37,7 +37,6 @@ public class UserManagementService {
     @Resource
     private ContactService contactService;
 
-
     public LoginResponse login(String username, String password) {
         User user = userService.getValidUser(username, password);
         Validation.validateUserIsActive(user);
@@ -61,7 +60,7 @@ public class UserManagementService {
         List<User> allUsers = userService.getUsersInfo();
         List<UserResponse> userResponses = new ArrayList<>();
         for (User user : allUsers) {
-            if (user.getContact() != null) {
+            if (user.getContact() != null && user.getContact().getEnd() == null) {
                 UserResponse userResponse = userMapper.userToUserResponse(user);
                 userResponses.add(userResponse);
             }
@@ -79,7 +78,6 @@ public class UserManagementService {
 
     public UserResponse getDetailedUserInfo(String username) {
         User user = userService.getDetailedUserInfo(username);
-        UserResponse userResponse = userMapper.userToUserResponse(user);
-        return userResponse;
+        return userMapper.userToUserResponse(user);
     }
 }

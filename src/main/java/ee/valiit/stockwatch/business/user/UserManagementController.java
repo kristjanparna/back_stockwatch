@@ -42,6 +42,10 @@ public class UserManagementController {
 
     @GetMapping("/userinfo/detail")
     @Operation(summary = "Tagastab ühe kasutaja andmed admin paneeli")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Kasutaja leitud"),
+            @ApiResponse(responseCode = "404", description = "Sisestatud kasutajanime ei leitud")
+    })
     public UserResponse getDetailedUserInfo(String username) {
         UserResponse detailedUserInfo = userManagementService.getDetailedUserInfo(username);
         return detailedUserInfo;
@@ -58,7 +62,6 @@ public class UserManagementController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Muudab kasutaja kontaktandmetes e-posti aadressi"),
             @ApiResponse(responseCode = "403", description = "Sisestatud e-posti aadress on juba kasutuses")
-
     })
     public String editUser(@RequestParam String username, @RequestParam String email) {
         userManagementService.editUser(username, email);

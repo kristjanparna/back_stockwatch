@@ -15,14 +15,12 @@ public class InstrumentController {
     @Resource
     private InstrumentManagementService instrumentManagementService;
 
-
     @GetMapping(value = "/ticker", produces = "application/json")
     @Operation(summary = "Tagastab nimekirja tickeri otsingu tulemustega")
     public List<Quote> getTickerInfo(String search) {
         List<Quote> info = instrumentManagementService.getTickerInfo(search);
         return info;
     }
-
 
     @GetMapping(value = "/search", produces = "application/json")
     @Operation(summary = "Tagastab konkreetse instrumendi info välisest API'st")
