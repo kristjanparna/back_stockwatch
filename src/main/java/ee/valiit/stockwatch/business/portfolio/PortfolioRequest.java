@@ -26,4 +26,6 @@ public class PortfolioRequest implements Serializable {
     private BigDecimal transactionFee;
     @NotNull
     private LocalDate purchaseDate;
+    @NotNull
+    private Integer transactionTypeId;
 }

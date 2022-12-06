@@ -27,7 +27,6 @@ VALUES (DEFAULT, 2, 4, 'Wick', '123');
 INSERT INTO public."user" (id, role_id, contact_id, username, password)
 VALUES (DEFAULT, 2, 5, 'Nakatomi', '123');
 
-
 INSERT INTO public.instrument (id, ticker) VALUES (DEFAULT, 'MSFT');
 INSERT INTO public.instrument (id, ticker) VALUES (DEFAULT, 'APPL');
 INSERT INTO public.instrument (id, ticker) VALUES (DEFAULT, 'GM');
