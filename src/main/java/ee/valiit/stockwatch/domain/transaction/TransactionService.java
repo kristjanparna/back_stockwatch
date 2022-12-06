@@ -1,6 +1,5 @@
 package ee.valiit.stockwatch.domain.transaction;
 
-
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -16,5 +15,4 @@ public class TransactionService {
         List<Transaction> historyByUserId = transactionRepository.findHistoryByUserId(userId);
         return historyByUserId;
     }
-
 }

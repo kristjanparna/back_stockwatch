@@ -1,7 +1,7 @@
 package ee.valiit.stockwatch.domain.user.user;
 
-import ee.valiit.stockwatch.domain.user.contact.Contact;
-import ee.valiit.stockwatch.domain.user.contact.ContactRepository;
+import ee.valiit.stockwatch.business.watchlist.contact.Contact;
+import ee.valiit.stockwatch.business.watchlist.contact.ContactRepository;
 import ee.valiit.stockwatch.validation.Validation;
 import org.springframework.stereotype.Service;
 
@@ -32,8 +32,7 @@ public class UserService {
     }
 
     public List<User> getUsersInfo() {
-        List<User> allUsers = userRepository.findAll();
-        return allUsers;
+        return userRepository.findAll();
     }
 
     public void deactivateUser(String username) {
@@ -62,7 +61,6 @@ public class UserService {
     }
 
     public User getDetailedUserInfo(String username) {
-        User user = userRepository.findUserByUsername(username);
-        return user;
+        return userRepository.findUserByUsername(username);
     }
 }

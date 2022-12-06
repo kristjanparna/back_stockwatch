@@ -2,9 +2,9 @@ package ee.valiit.stockwatch.business.user;
 
 import ee.valiit.stockwatch.business.user.login.LoginResponse;
 import ee.valiit.stockwatch.business.user.register.RegisterRequest;
-import ee.valiit.stockwatch.domain.user.contact.Contact;
-import ee.valiit.stockwatch.domain.user.contact.ContactMapper;
-import ee.valiit.stockwatch.domain.user.contact.ContactService;
+import ee.valiit.stockwatch.business.watchlist.contact.Contact;
+import ee.valiit.stockwatch.business.watchlist.contact.ContactMapper;
+import ee.valiit.stockwatch.business.watchlist.contact.ContactService;
 import ee.valiit.stockwatch.domain.user.role.Role;
 import ee.valiit.stockwatch.domain.user.role.RoleService;
 import ee.valiit.stockwatch.domain.user.user.User;

@@ -1,7 +1,7 @@
 package ee.valiit.stockwatch.validation;
 
 import ee.valiit.stockwatch.domain.instrument.instrument.Instrument;
-import ee.valiit.stockwatch.domain.user.contact.Contact;
+import ee.valiit.stockwatch.business.watchlist.contact.Contact;
 import ee.valiit.stockwatch.domain.user.user.User;
 import ee.valiit.stockwatch.infrastructure.exception.BusinessException;
 
@@ -19,7 +19,7 @@ public class Validation {
 
     public static void validateUsernameExists(User user, List<User> userList) {
         for (User firstUser : userList) {
-            if (firstUser.getUsername().equals(user.getUsername())) {
+            if (firstUser.getUsername().equalsIgnoreCase(user.getUsername())) {
                 throw new BusinessException(StockwatchError.USERNAME_EXISTS.getMessage(), StockwatchError.USERNAME_EXISTS.getErrorCode());
             }
         }

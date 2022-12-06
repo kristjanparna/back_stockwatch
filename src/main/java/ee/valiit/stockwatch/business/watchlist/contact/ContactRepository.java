@@ -1,4 +1,4 @@
-package ee.valiit.stockwatch.domain.user.contact;
+package ee.valiit.stockwatch.business.watchlist.contact;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

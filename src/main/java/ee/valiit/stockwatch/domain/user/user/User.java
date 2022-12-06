@@ -1,6 +1,6 @@
 package ee.valiit.stockwatch.domain.user.user;
 
-import ee.valiit.stockwatch.domain.user.contact.Contact;
+import ee.valiit.stockwatch.business.watchlist.contact.Contact;
 import ee.valiit.stockwatch.domain.user.role.Role;
 import lombok.Getter;
 import lombok.Setter;

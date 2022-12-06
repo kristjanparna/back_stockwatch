@@ -49,7 +49,7 @@ public class PortfolioService {
 
     private void addTransactionHistory(PortfolioRequest portfolioRequest, Portfolio portfolio) {
         Transaction transaction = transactionMapper.portfolioRequestToTransaction(portfolioRequest);
-        transactionMapper.transactionToTransactionDto(transaction);
+        transactionMapper.transactionDtoToTransaction(transaction);
         createNewTransaction(portfolioRequest, transaction, portfolio);
         transactionRepository.save(transaction);
     }

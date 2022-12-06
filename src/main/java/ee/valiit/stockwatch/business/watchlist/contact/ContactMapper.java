@@ -1,4 +1,4 @@
-package ee.valiit.stockwatch.domain.user.contact;
+package ee.valiit.stockwatch.business.watchlist.contact;
 
 
 import ee.valiit.stockwatch.business.user.register.RegisterRequest;

@@ -19,6 +19,8 @@ INSERT INTO public.contact (id, first_name, last_name, email, start, "end")
 VALUES (DEFAULT, 'H.M', 'Murdock', 'h.m@a-team.com', DEFAULT, NULL);
 INSERT INTO public.contact (id, first_name, last_name, email, start, "end")
 VALUES (DEFAULT, 'Michael', 'Knight', 'kitt@email.com', DEFAULT, NULL);
+INSERT INTO public.contact (id, first_name, last_name, email, start, "end")
+VALUES (DEFAULT, 'John', 'Matrix', 'mrolympia@email.com', DEFAULT, NULL);
 
 INSERT INTO public."user" (id, role_id, contact_id, username, password)
 VALUES (DEFAULT, 1, NULL, 'admin', '123');
@@ -38,6 +40,8 @@ INSERT INTO public."user" (id, role_id, contact_id, username, password)
 VALUES (DEFAULT, 2, 7, 'Captain', '123');
 INSERT INTO public."user" (id, role_id, contact_id, username, password)
 VALUES (DEFAULT, 2, 8, 'BestDriver', '123');
+INSERT INTO public."user" (id, role_id, contact_id, username, password)
+VALUES (DEFAULT, 2, 9, 'commando', '123');
 
 INSERT INTO public.instrument (id, ticker) VALUES (DEFAULT, 'MSFT');
 INSERT INTO public.instrument (id, ticker) VALUES (DEFAULT, 'APPL');
