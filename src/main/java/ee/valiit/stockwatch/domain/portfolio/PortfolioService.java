@@ -42,20 +42,16 @@ public class PortfolioService {
         List<Instrument> allInstruments = instrumentService.findAllInstruments();
         instrument = checkIfInstrumentExists(portfolioRequest, instrument, allInstruments);
         Portfolio portfolio = portfolioMapper.portfolioRequestToPortfolio(portfolioRequest);
-        createNewPortfolioItem(portfolioRequest, instrument, allInstruments, portfolio);
+        createNewPortfolioItem(portfolioRequest, instrument, portfolio);
         portfolioRepository.save(portfolio);
+        addTransactionHistory(portfolioRequest, portfolio);
+    }
+
+    private void addTransactionHistory(PortfolioRequest portfolioRequest, Portfolio portfolio) {
         Transaction transaction = transactionMapper.portfolioRequestToTransaction(portfolioRequest);
         transactionMapper.transactionToTransactionDto(transaction);
         createNewTransaction(portfolioRequest, transaction, portfolio);
         transactionRepository.save(transaction);
-    }
-
-    public void setTransactionHistory(PortfolioRequest portfolioRequest) {
-        Portfolio portfolio = new Portfolio();
-//        Transaction transaction = transactionMapper.portfolioRequestToTransaction(portfolioRequest);
-//        transactionMapper.transactionToTransactionDto(transaction);
-//        createNewTransaction(portfolioRequest, transaction, portfolio);
-//        transactionRepository.save(transaction);
     }
 
     private void createNewTransaction(PortfolioRequest portfolioRequest, Transaction transaction, Portfolio portfolio) {
@@ -63,10 +59,9 @@ public class PortfolioService {
         transaction.setPrice(portfolioRequest.getPurchasePrice());
         transaction.setAmount(portfolioRequest.getAmount());
         transaction.setDate(LocalDate.now());
-
     }
 
-    private void createNewPortfolioItem(PortfolioRequest portfolioRequest, Instrument instrument, List<Instrument> allInstruments, Portfolio portfolio) {
+    private void createNewPortfolioItem(PortfolioRequest portfolioRequest, Instrument instrument, Portfolio portfolio) {
         User user = userService.findUserById(portfolioRequest.getUserId());
         portfolio.setUser(user);
         portfolio.setPurchaseDate(LocalDate.now());

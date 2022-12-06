@@ -3,6 +3,7 @@ package ee.valiit.stockwatch.business.user;
 
 import ee.valiit.stockwatch.business.user.login.LoginResponse;
 import ee.valiit.stockwatch.business.user.register.RegisterRequest;
+import ee.valiit.stockwatch.domain.user.user.User;
 import ee.valiit.stockwatch.domain.user.user.UserResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -37,6 +38,13 @@ public class UserManagementController {
     public List<UserResponse> getUsersInfo() {
         List<UserResponse> usersInfo = userManagementService.getUsersInfo();
         return usersInfo;
+    }
+
+    @GetMapping("/userinfo/detail")
+    @Operation(summary = "Tagastab ühe kasutaja andmed admin paneeli")
+    public UserResponse getDetailedUserInfo(String username) {
+        UserResponse detailedUserInfo = userManagementService.getDetailedUserInfo(username);
+        return detailedUserInfo;
     }
 
     @PutMapping("/remove")

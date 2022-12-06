@@ -13,6 +13,10 @@ INSERT INTO public.contact (id, first_name, last_name, email, start, "end")
 VALUES (DEFAULT, 'John', 'Wick', 'donttouchmydog@email.com', DEFAULT, NULL);
 INSERT INTO public.contact (id, first_name, last_name, email, start, "end")
 VALUES (DEFAULT, 'John', 'McClane', 'yippee-ki-yay@email.com', DEFAULT, NULL);
+INSERT INTO public.contact (id, first_name, last_name, email, start, "end")
+VALUES (DEFAULT, 'Rocky', 'Balboa', 'boxer12@email.com', DEFAULT, NULL);
+INSERT INTO public.contact (id, first_name, last_name, email, start, "end")
+VALUES (DEFAULT, 'H.M', 'Murdock', 'captain@email.com', DEFAULT, NULL);
 
 INSERT INTO public."user" (id, role_id, contact_id, username, password)
 VALUES (DEFAULT, 1, NULL, 'admin', '123');
@@ -26,6 +30,10 @@ INSERT INTO public."user" (id, role_id, contact_id, username, password)
 VALUES (DEFAULT, 2, 4, 'Wick', '123');
 INSERT INTO public."user" (id, role_id, contact_id, username, password)
 VALUES (DEFAULT, 2, 5, 'Nakatomi', '123');
+INSERT INTO public."user" (id, role_id, contact_id, username, password)
+VALUES (DEFAULT, 2, 6, 'Rocky', '123');
+INSERT INTO public."user" (id, role_id, contact_id, username, password)
+VALUES (DEFAULT, 2, 7, 'Captain', '123');
 
 INSERT INTO public.instrument (id, ticker) VALUES (DEFAULT, 'MSFT');
 INSERT INTO public.instrument (id, ticker) VALUES (DEFAULT, 'APPL');

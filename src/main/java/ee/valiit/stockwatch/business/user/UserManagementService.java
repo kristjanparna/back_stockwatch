@@ -75,6 +75,11 @@ public class UserManagementService {
 
     public void editUser(String username, String email) {
         userService.editUser(username, email);
+    }
 
+    public UserResponse getDetailedUserInfo(String username) {
+        User user = userService.getDetailedUserInfo(username);
+        UserResponse userResponse = userMapper.userToUserResponse(user);
+        return userResponse;
     }
 }

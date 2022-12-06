@@ -60,4 +60,9 @@ public class UserService {
         user.getContact().setEmail(email);
         userRepository.save(user);
     }
+
+    public User getDetailedUserInfo(String username) {
+        User user = userRepository.findUserByUsername(username);
+        return user;
+    }
 }
