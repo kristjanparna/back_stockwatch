@@ -65,6 +65,16 @@ INSERT INTO public.watchlist (id, user_id, instrument_id, price_higher, price_lo
 VALUES (DEFAULT, 2, 3, 105.00, 20.00, null, 50.00, DEFAULT);
 INSERT INTO public.watchlist (id, user_id, instrument_id, price_higher, price_lower, user_comment, price_at_addition, addition_date)
 VALUES (DEFAULT, 2, 5, 120.00, 20.00, null, 60.00, DEFAULT);
+INSERT INTO public.watchlist (id, user_id, instrument_id, price_higher, price_lower, user_comment, price_at_addition, addition_date)
+VALUES (DEFAULT, 2, 17, 120.00, 20.00, null, 60.00, DEFAULT);
+INSERT INTO public.watchlist (id, user_id, instrument_id, price_higher, price_lower, user_comment, price_at_addition, addition_date)
+VALUES (DEFAULT, 6, 5, 100, null, null, 76.51 , DEFAULT);
+INSERT INTO public.watchlist (id, user_id, instrument_id, price_higher, price_lower, user_comment, price_at_addition, addition_date)
+VALUES (DEFAULT, 6, 12, 430, null, 'Ootan jaemüügi aeglustumist', 481.16 , DEFAULT);
+
+
+
+
 
 INSERT INTO public.transaction_type (id, name) VALUES (DEFAULT, 'buy');
 INSERT INTO public.transaction_type (id, name) VALUES (DEFAULT, 'sell');
