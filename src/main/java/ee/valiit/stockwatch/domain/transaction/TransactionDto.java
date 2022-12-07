@@ -25,4 +25,6 @@ public class TransactionDto implements Serializable {
     private final BigDecimal price;
     @NotNull
     private final LocalDate date;
+    private BigDecimal transactionFee;
+
 }

@@ -17,6 +17,7 @@ CREATE TABLE contact (
 CREATE TABLE instrument (
                             id serial  NOT NULL,
                             ticker varchar(255)  NOT NULL,
+                            shortname varchar(255) NOT NULL,
                             CONSTRAINT instrument_ak_1 UNIQUE (ticker) NOT DEFERRABLE  INITIALLY IMMEDIATE,
                             CONSTRAINT instrument_pk PRIMARY KEY (id)
 );
