@@ -20,7 +20,7 @@ public class PortfolioManagementService {
         portfolioService.reduceInPortfolio(portfolioRequest);
     }
 
-    public void getPortfolioInformation(PortfolioRequest portfolioRequest) {
-        portfolioService.getPortfolioInformation(portfolioRequest);
+    public void getPortfolioInformation(Integer userId) {
+        portfolioService.getPortfolioInformation(userId);
     }
 }

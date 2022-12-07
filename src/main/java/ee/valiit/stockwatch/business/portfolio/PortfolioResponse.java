@@ -15,13 +15,13 @@ import java.math.BigDecimal;
 public class PortfolioResponse implements Serializable {
     @Size(max = 255)
     @NotNull
-    private final String ticker;
-    @NotNull
-    private final Integer amount;
-    private final BigDecimal transactionFee;
-    @NotNull
-    private final BigDecimal avgBuyingPrice;
-    private final BigDecimal currentPrice;
-    private final BigDecimal priceChangePercentage;
-    private final BigDecimal earning;
+    private String ticker;
+    private Integer amount;
+    private BigDecimal transactionFee;
+    private BigDecimal avgBuyingPrice;
+    private BigDecimal currentPrice;
+    private BigDecimal priceChangePercentage;
+    private BigDecimal earning;
+
 }
+

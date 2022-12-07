@@ -25,8 +25,8 @@ public class PortfolioController {
 
     @GetMapping("/portfolio")
     @Operation(summary = "Tagastab listi kasutaja portfellis olevate instrumentede infoga")
-    public void getPortfolioInformation(@RequestBody PortfolioRequest portfolioRequest) {
-        portfolioManagementService.getPortfolioInformation(portfolioRequest);
+    public void getPortfolioInformation(Integer userId) {
+        portfolioManagementService.getPortfolioInformation(userId);
     }
 
 }
