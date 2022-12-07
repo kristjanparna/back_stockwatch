@@ -8,8 +8,8 @@ import org.mapstruct.ReportingPolicy;
 
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = "spring")
 public interface TransactionMapper {
-    @Mapping(source = "purchasePrice", target = "price")
-    @Mapping(source = "purchaseDate", target = "date")
+    @Mapping(source = "transactionPrice", target = "price")
+    @Mapping(source = "transactionDate", target = "date")
     @Mapping(source = "transactionTypeId", target = "transactionTypeId")
     Transaction portfolioRequestToTransaction(PortfolioRequest portfolioRequest);
 

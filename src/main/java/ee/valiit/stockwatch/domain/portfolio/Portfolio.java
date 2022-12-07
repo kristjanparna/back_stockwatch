@@ -32,7 +32,7 @@ public class Portfolio {
 
     @NotNull
     @Column(name = "purchase_price", nullable = false, precision = 6, scale = 2)
-    private BigDecimal purchasePrice;
+    private BigDecimal transactionPrice;
 
     @NotNull
     @Column(name = "amount", nullable = false)
@@ -43,6 +43,6 @@ public class Portfolio {
 
     @NotNull
     @Column(name = "purchase_date", nullable = false)
-    private LocalDate purchaseDate;
+    private LocalDate transactionDate;
 
 }

@@ -19,4 +19,8 @@ public class PortfolioManagementService {
     public void reduceInPortfolio(PortfolioRequest portfolioRequest) {
         portfolioService.reduceInPortfolio(portfolioRequest);
     }
+
+    public void getPortfolioInformation(PortfolioRequest portfolioRequest) {
+        portfolioService.getPortfolioInformation(portfolioRequest);
+    }
 }

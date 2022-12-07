@@ -7,25 +7,21 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.time.LocalDate;
 
 /**
  * A DTO for the {@link Portfolio} entity
  */
 @Data
-public class PortfolioRequest implements Serializable {
-
-    private Integer userId;
+public class PortfolioResponse implements Serializable {
     @Size(max = 255)
     @NotNull
-    private String ticker;
+    private final String ticker;
     @NotNull
-    private BigDecimal transactionPrice;
+    private final Integer amount;
+    private final BigDecimal transactionFee;
     @NotNull
-    private Integer amount;
-    private BigDecimal transactionFee;
-    @NotNull
-    private LocalDate transactionDate;
-    @NotNull
-    private Integer transactionTypeId;
+    private final BigDecimal avgBuyingPrice;
+    private final BigDecimal currentPrice;
+    private final BigDecimal priceChangePercentage;
+    private final BigDecimal earning;
 }
