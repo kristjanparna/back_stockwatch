@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -17,7 +18,12 @@ public class TransactionController {
 
     @GetMapping(value = "/history", produces = "application/json")
     @Operation(summary = "Kuvab tehingute ajaloo")
-    public List<TransactionDto> getTransactionHistory(@RequestParam Integer userId) {
-        return transactionManagementService.getTransactionHistory(userId);
+    public List<TransactionDto> getTransactionHistory(@RequestParam Integer userId, @RequestParam Integer transactionTypeId,
+    @RequestParam(required = false) LocalDate dateStart, @RequestParam(required = false) LocalDate dateEnd) {
+        if (dateStart == null && dateEnd == null) {
+            return transactionManagementService.getTransactionHistory(userId, transactionTypeId);
+        } else {
+            return transactionManagementService.findByUserIdAndTypeIdAndDate(userId, transactionTypeId, dateStart, dateEnd);
+        }
     }
 }
