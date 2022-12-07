@@ -19,7 +19,7 @@ public class PortfolioController {
 
     @PutMapping("/portfolio")
     @Operation(summary = "Vähendab instrumendi kogust portfellis ja lisab tegevuse tehingute ajaloo tabelisse")
-    public void reduceTickerAmount() {
-
+    public void reduceTickerAmount(@RequestBody PortfolioRequest portfolioRequest) {
+        portfolioManagementService.reduceInPortfolio(portfolioRequest);
     }
 }

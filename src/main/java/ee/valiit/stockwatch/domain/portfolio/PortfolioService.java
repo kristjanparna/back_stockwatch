@@ -46,6 +46,15 @@ public class PortfolioService {
         portfolioRepository.save(portfolio);
         addTransactionHistory(portfolioRequest, portfolio);
     }
+    public void reduceInPortfolio(PortfolioRequest portfolioRequest) {
+        Instrument instrument = new Instrument();
+        List<Instrument> allInstruments = instrumentService.findAllInstruments();
+        instrument = checkIfInstrumentExists(portfolioRequest, instrument, allInstruments);
+        Portfolio portfolio = portfolioMapper.portfolioRequestToPortfolio(portfolioRequest);
+        createNewPortfolioItem(portfolioRequest, instrument, portfolio);
+        portfolioRepository.save(portfolio);
+        addTransactionHistory(portfolioRequest, portfolio);
+    }
 
     private void addTransactionHistory(PortfolioRequest portfolioRequest, Portfolio portfolio) {
         Transaction transaction = transactionMapper.portfolioRequestToTransaction(portfolioRequest);
@@ -56,7 +65,7 @@ public class PortfolioService {
 
     private void createNewTransaction(PortfolioRequest portfolioRequest, Transaction transaction, Portfolio portfolio) {
         transaction.setPortfolio(portfolio);
-        transaction.setPrice(portfolioRequest.getPurchasePrice());
+        transaction.setPrice(portfolioRequest.getTransactionPrice());
         transaction.setAmount(portfolioRequest.getAmount());
         transaction.setDate(LocalDate.now());
     }
@@ -86,4 +95,6 @@ public class PortfolioService {
         instrument = instrumentService.findInstrumentByTicker(portfolioRequest.getTicker());
         return instrument;
     }
+
+
 }

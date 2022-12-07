@@ -20,7 +20,8 @@ public class PortfolioRequest implements Serializable {
     @NotNull
     private String ticker;
     @NotNull
-    private BigDecimal purchasePrice;
+    private BigDecimal transactionPrice;
+//
     @NotNull
     private Integer amount;
     private BigDecimal transactionFee;

@@ -15,4 +15,8 @@ public class PortfolioManagementService {
     public void addToPortfolio(PortfolioRequest portfolioRequest) {
         portfolioService.addInstrumentToPortfolio(portfolioRequest);
     }
+
+    public void reduceInPortfolio(PortfolioRequest portfolioRequest) {
+        portfolioService.reduceInPortfolio(portfolioRequest);
+    }
 }
