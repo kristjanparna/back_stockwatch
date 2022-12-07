@@ -11,8 +11,8 @@ public class TransactionService {
     @Resource
     private TransactionRepository transactionRepository;
 
-    public List<Transaction> getTransactionHistory(Integer userId) {
-        List<Transaction> historyByUserId = transactionRepository.findHistoryByUserId(userId);
-        return historyByUserId;
+    @Resource
+    private TransactionMapper transactionMapper;
+
     }
-}
+

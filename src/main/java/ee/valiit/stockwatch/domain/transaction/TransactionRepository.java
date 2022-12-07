@@ -9,4 +9,5 @@ public interface TransactionRepository extends JpaRepository<Transaction, Intege
     @Query("select t from Transaction t where t.portfolio.user.id = ?1")
     List<Transaction> findHistoryByUserId(Integer id);
 
+
 }
