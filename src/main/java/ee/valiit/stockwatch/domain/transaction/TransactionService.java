@@ -32,7 +32,6 @@ public class TransactionService {
             }
         }
         return transactionDtos;
-
     }
 
     public List<TransactionDto> getTransactionHistory(Integer userId, Integer transactionTypeId, LocalDate dateStart, LocalDate dateEnd) {
@@ -41,13 +40,14 @@ public class TransactionService {
             List<Transaction> transactionsByIdAndDate = transactionRepository.findByUserIdAndTypeIdAndDate(userId, transactionTypeId, dateStart, dateEnd);
             for (Transaction transaction : transactionsByIdAndDate) {
                 transactionDtosByDate.add(transactionMapper.transactionToTransactionDto(transaction));
-            } return transactionDtosByDate;
+            }
+            return transactionDtosByDate;
         } else {
-            List<Transaction> transactionsByIdAndDate = transactionRepository.findByUserIdAndDate(userId, dateStart,dateEnd);
+            List<Transaction> transactionsByIdAndDate = transactionRepository.findByUserIdAndDate(userId, dateStart, dateEnd);
             for (Transaction transaction : transactionsByIdAndDate) {
                 transactionDtosByDate.add(transactionMapper.transactionToTransactionDto(transaction));
             }
-        return transactionDtosByDate;
+            return transactionDtosByDate;
         }
     }
 }
