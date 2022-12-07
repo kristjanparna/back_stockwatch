@@ -76,5 +76,11 @@ VALUES (DEFAULT, 5, 12, 430, null, 'Ootan jaemüügi aeglustumist', 481.16 , DEF
 INSERT INTO public.watchlist (id, user_id, instrument_id, price_higher, price_lower, user_comment, price_at_addition, addition_date)
 VALUES (DEFAULT, 5, 5, 120.00, 20.00, null, 60.00, DEFAULT);
 
+INSERT INTO public.portfolio (id, user_id, instrument_id, purchase_price, amount, transaction_fee, purchase_date)
+VALUES (DEFAULT, 2, 10, 120.00, 60, 5.00, DEFAULT);
+
+INSERT INTO public.portfolio (id, user_id, instrument_id, purchase_price, amount, transaction_fee, purchase_date)
+VALUES (DEFAULT, 2, 11, 15.00, 10, null, DEFAULT);
+
 INSERT INTO public.transaction_type (id, name) VALUES (DEFAULT, 'buy');
 INSERT INTO public.transaction_type (id, name) VALUES (DEFAULT, 'sell');

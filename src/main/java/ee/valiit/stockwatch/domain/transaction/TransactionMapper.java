@@ -1,9 +1,10 @@
 package ee.valiit.stockwatch.domain.transaction;
 
 import ee.valiit.stockwatch.business.portfolio.PortfolioRequest;
-import org.mapstruct.*;
-
-import java.util.List;
+import org.mapstruct.InheritInverseConfiguration;
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+import org.mapstruct.ReportingPolicy;
 
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = "spring")
 public interface TransactionMapper {
@@ -14,5 +15,8 @@ public interface TransactionMapper {
 
     @Mapping(source = "portfolio.id", target = "portfolioId")
     TransactionDto transactionDtoToTransaction(Transaction transaction);
+
+    @InheritInverseConfiguration(name = "transactionDtoToTransaction1")
+    TransactionDto transactionToTransactionDto(Transaction transaction);
 
 }
