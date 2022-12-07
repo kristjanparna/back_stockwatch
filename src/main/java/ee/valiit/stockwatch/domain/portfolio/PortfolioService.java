@@ -66,12 +66,6 @@ public class PortfolioService {
         } else {
             addInstrumentToPortfolio(portfolioRequest);
         }
-
-
-//        Portfolio portfolio = portfolioMapper.portfolioRequestToPortfolio(portfolioRequest);
-////        createNewPortfolioItem(portfolioRequest, instrument, portfolio);
-//        portfolioRepository.save(portfolio);
-//        addTransactionHistory(portfolioRequest, portfolio);
     }
 
     private void addTransactionHistory(PortfolioRequest portfolioRequest, Portfolio portfolio) {
@@ -87,8 +81,7 @@ public class PortfolioService {
                 return existingInstrument;
             }
         }
-        Instrument instrument = addInstrument(portfolioRequest);
-        return instrument;
+        return addInstrument(portfolioRequest);
     }
 
     private Instrument addInstrument(PortfolioRequest portfolioRequest) {
@@ -98,7 +91,8 @@ public class PortfolioService {
 
 
     public void getPortfolioInformation(PortfolioRequest portfolioRequest) {
-        // TODO: something nice
+        List<Portfolio> portfolios = portfolioRepository.findBy(portfolioRequest.getUserId());
+
 
 
 
