@@ -17,6 +17,7 @@ import java.util.List;
 
 @Data
 public class WatchlistResponse implements Serializable {
+    private Integer id;
     private String ticker;
     private String shortName;
     private String currency;

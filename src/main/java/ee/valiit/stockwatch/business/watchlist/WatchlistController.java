@@ -2,10 +2,7 @@ package ee.valiit.stockwatch.business.watchlist;
 
 import ee.valiit.stockwatch.domain.watchlist.WatchlistResponse;
 import io.swagger.v3.oas.annotations.Operation;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -26,5 +23,11 @@ public class WatchlistController {
     @Operation(summary = "Tagastab kogu kasutaja watchlisti info")
     public List<WatchlistResponse> getWatchlistData(Integer userId) {
         return watchlistManagementService.getWatchlistData(userId);
+    }
+
+    @DeleteMapping("/watchlist")
+    @Operation(summary = "Eemaldab instrumendi jälgimisnimekirjast")
+    public void removeFromWatchlist(String ticker) {
+        watchlistManagementService.removeFromWatchlist(ticker);
     }
 }

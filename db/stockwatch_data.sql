@@ -82,6 +82,16 @@ INSERT INTO public.watchlist (id, user_id, instrument_id, price_higher, price_lo
 VALUES (DEFAULT, 2, 3, 180, null, null, 37.96, DEFAULT);
 INSERT INTO public.watchlist (id, user_id, instrument_id, price_higher, price_lower, user_comment, price_at_addition, addition_date)
 VALUES (DEFAULT, 2, 7 , 36, 50, 'Kõrgete energiahindade tuules võiks ise ka rikkaks saada', 42.12, DEFAULT);
+INSERT INTO public.watchlist (id, user_id, instrument_id, price_higher, price_lower, user_comment, price_at_addition, addition_date)
+VALUES (DEFAULT, 1, 24, 30, 60, 'Kas koroona tuleb tagasi?', 50.24, DEFAULT);
+INSERT INTO public.watchlist (id, user_id, instrument_id, price_higher, price_lower, user_comment, price_at_addition, addition_date)
+VALUES (DEFAULT, 1, 2, 180, null, 'Ootan uut iPhone', 140.94, DEFAULT);
+INSERT INTO public.watchlist (id, user_id, instrument_id, price_higher, price_lower, user_comment, price_at_addition, addition_date)
+VALUES (DEFAULT, 1, 2, 180, null, 'Ootan uut iPhone', 140.94, DEFAULT);
+INSERT INTO public.watchlist (id, user_id, instrument_id, price_higher, price_lower, user_comment, price_at_addition, addition_date)
+VALUES (DEFAULT, 1, 3, 180, null, null, 37.96, DEFAULT);
+INSERT INTO public.watchlist (id, user_id, instrument_id, price_higher, price_lower, user_comment, price_at_addition, addition_date)
+VALUES (DEFAULT, 1, 7 , 36, 50, 'Kõrgete energiahindade tuules võiks ise ka rikkaks saada', 42.12, DEFAULT);
 
 
 INSERT INTO public.portfolio (id, user_id, instrument_id, purchase_price, amount, transaction_fee, purchase_date)
