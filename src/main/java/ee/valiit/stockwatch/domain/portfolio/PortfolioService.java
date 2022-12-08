@@ -67,6 +67,11 @@ public class PortfolioService {
         if (totalInstrumentAmount < portfolioRequest.getAmount()) {
             throw new BusinessException(StockwatchError.NOT_ENOUGH_INSTRUMENTS.getMessage(), StockwatchError.NOT_ENOUGH_INSTRUMENTS.getErrorCode());
         } else {
+
+            //TODO: ära lisa instrumenti portfelli vaid muuda kogust
+
+
+
             addInstrumentToPortfolio(portfolioRequest);
         }
     }
@@ -131,6 +136,9 @@ public class PortfolioService {
 
             for (Portfolio portfolio : portfoliosOfOneInstrument) { // Käin läbi kõik selle instrumendiga portfellid
                 float transactionPrice = portfolio.getTransactionPrice().floatValue();
+
+// TODO: Küsi selle transactioni tüüp ja liida või lahuta see sumOfTransactionPrices'ele
+
                 sumOfTransactionPrices += transactionPrice; // Lisan selle instrumendi tehingutasu summasse
                 Integer amount = portfolio.getAmount();
                 numberOfInstruments += amount; // Salvestan selle instrumendi koguse muutujasse
