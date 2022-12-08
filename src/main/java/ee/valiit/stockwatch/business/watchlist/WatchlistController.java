@@ -22,7 +22,6 @@ public class WatchlistController {
         watchlistManagementService.addInstrumentToWatchlist(request);
     }
 
-
     @GetMapping(value = "/watchlist")
     @Operation(summary = "Tagastab kogu kasutaja watchlisti info")
     public List<WatchlistResponse> getWatchlistData(Integer userId) {

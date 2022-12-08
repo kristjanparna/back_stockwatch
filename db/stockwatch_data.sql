@@ -47,12 +47,12 @@ INSERT INTO public."user" (id, role_id, contact_id, username, password)
 VALUES (DEFAULT, 2, 9, 'commando', '123');
 
 INSERT INTO public.instrument (id, ticker, shortname) VALUES (DEFAULT, 'MSFT', 'Microsoft Corporation');
-INSERT INTO public.instrument (id, ticker, shortname) VALUES (DEFAULT, 'APPL', 'Apple Inc');
+INSERT INTO public.instrument (id, ticker, shortname) VALUES (DEFAULT, 'AAPL', 'Apple Inc');
 INSERT INTO public.instrument (id, ticker, shortname) VALUES (DEFAULT, 'GM', 'General Motors');
 INSERT INTO public.instrument (id, ticker, shortname) VALUES (DEFAULT, 'F', 'Ford Motor Company');
 INSERT INTO public.instrument (id, ticker, shortname) VALUES (DEFAULT, 'MMM', '3M');
 INSERT INTO public.instrument (id, ticker, shortname) VALUES (DEFAULT, 'CAT', 'Caterpillar');
-INSERT INTO public.instrument (id, ticker, shortname) VALUES (DEFAULT, 'RWE', 'RWE AG');
+INSERT INTO public.instrument (id, ticker, shortname) VALUES (DEFAULT, 'RWE.DE', 'RWE AG');
 INSERT INTO public.instrument (id, ticker, shortname) VALUES (DEFAULT, 'BA', 'Boeing');
 INSERT INTO public.instrument (id, ticker, shortname) VALUES (DEFAULT, 'BABA', 'AliBaba');
 INSERT INTO public.instrument (id, ticker, shortname) VALUES (DEFAULT, 'IBM', 'International Business Machines');
@@ -66,21 +66,23 @@ INSERT INTO public.instrument (id, ticker, shortname) VALUES (DEFAULT, 'ZEN', 'Z
 INSERT INTO public.instrument (id, ticker, shortname) VALUES (DEFAULT, 'ZIM', 'ZIM Integrated Shipping');
 INSERT INTO public.instrument (id, ticker, shortname) VALUES (DEFAULT, 'MVIS', 'MicroVision');
 INSERT INTO public.instrument (id, ticker, shortname) VALUES (DEFAULT, 'NVDA', 'Nvidia');
+INSERT INTO public.instrument (id, ticker, shortname) VALUES (DEFAULT, 'DIS', 'Walt Disney Company (The)');
+INSERT INTO public.instrument (id, ticker, shortname) VALUES (DEFAULT, 'BYD', 'BYD');
+INSERT INTO public.instrument (id, ticker, shortname) VALUES (DEFAULT, 'DELL', 'Dell Technologies Inc.');
+INSERT INTO public.instrument (id, ticker, shortname) VALUES (DEFAULT, 'PFE', 'Pfizer, Inc.');
+
 
 INSERT INTO public.watchlist (id, user_id, instrument_id, price_higher, price_lower, user_comment, price_at_addition, addition_date)
-VALUES (DEFAULT, 2, 3, 105.00, 20.00, null, 50.00, DEFAULT);
+VALUES (DEFAULT, 2, 24, 30, 60, 'Kas koroona tuleb tagasi?', 50.24, DEFAULT);
 INSERT INTO public.watchlist (id, user_id, instrument_id, price_higher, price_lower, user_comment, price_at_addition, addition_date)
-VALUES (DEFAULT, 2, 5, 120.00, 20.00, null, 60.00, DEFAULT);
+VALUES (DEFAULT, 2, 2, 180, null, 'Ootan uut iPhone', 140.94, DEFAULT);
 INSERT INTO public.watchlist (id, user_id, instrument_id, price_higher, price_lower, user_comment, price_at_addition, addition_date)
-VALUES (DEFAULT, 2, 17, 120.00, 20.00, null, 60.00, DEFAULT);
+VALUES (DEFAULT, 2, 2, 180, null, 'Ootan uut iPhone', 140.94, DEFAULT);
 INSERT INTO public.watchlist (id, user_id, instrument_id, price_higher, price_lower, user_comment, price_at_addition, addition_date)
-VALUES (DEFAULT, 6, 5, 100, null, null, 76.51 , DEFAULT);
+VALUES (DEFAULT, 2, 3, 180, null, null, 37.96, DEFAULT);
 INSERT INTO public.watchlist (id, user_id, instrument_id, price_higher, price_lower, user_comment, price_at_addition, addition_date)
-VALUES (DEFAULT, 6, 12, 430, null, 'Ootan jaemüügi aeglustumist', 481.16 , DEFAULT);
-INSERT INTO public.watchlist (id, user_id, instrument_id, price_higher, price_lower, user_comment, price_at_addition, addition_date)
-VALUES (DEFAULT, 5, 12, 430, null, 'Ootan jaemüügi aeglustumist', 481.16 , DEFAULT);
-INSERT INTO public.watchlist (id, user_id, instrument_id, price_higher, price_lower, user_comment, price_at_addition, addition_date)
-VALUES (DEFAULT, 5, 5, 120.00, 20.00, null, 60.00, DEFAULT);
+VALUES (DEFAULT, 2, 7 , 36, 50, 'Kõrgete energiahindade tuules võiks ise ka rikkaks saada', 42.12, DEFAULT);
+
 
 INSERT INTO public.portfolio (id, user_id, instrument_id, purchase_price, amount, transaction_fee, purchase_date)
 VALUES (DEFAULT, 2, 9, 120.00, 60, 5.00, '2022-11-01');

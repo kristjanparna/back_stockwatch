@@ -85,7 +85,7 @@ public class PortfolioService {
     }
 
     private Instrument addInstrument(PortfolioRequest portfolioRequest) {
-        instrumentService.addNewInstrument(portfolioRequest.getTicker());
+        instrumentService.addNewInstrument(portfolioRequest.getTicker(), portfolioRequest.getShortName());
         return instrumentService.findInstrumentByTicker(portfolioRequest.getTicker());
     }
 
