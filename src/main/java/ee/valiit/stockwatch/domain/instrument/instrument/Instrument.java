@@ -22,4 +22,9 @@ public class Instrument {
     @Column(name = "ticker", nullable = false)
     private String ticker;
 
+    @Size(max = 255)
+    @NotNull
+    @Column(name = "shortname", nullable = false)
+    private String shortname;
+
 }

@@ -43,23 +43,23 @@ VALUES (DEFAULT, 2, 8, 'BestDriver', '123');
 INSERT INTO public."user" (id, role_id, contact_id, username, password)
 VALUES (DEFAULT, 2, 9, 'commando', '123');
 
-INSERT INTO public.instrument (id, ticker) VALUES (DEFAULT, 'MSFT');
-INSERT INTO public.instrument (id, ticker) VALUES (DEFAULT, 'APPL');
-INSERT INTO public.instrument (id, ticker) VALUES (DEFAULT, 'GM');
-INSERT INTO public.instrument (id, ticker) VALUES (DEFAULT, 'F');
-INSERT INTO public.instrument (id, ticker) VALUES (DEFAULT, 'MMM');
-INSERT INTO public.instrument (id, ticker) VALUES (DEFAULT, 'CAT');
-INSERT INTO public.instrument (id, ticker) VALUES (DEFAULT, 'RWE');
-INSERT INTO public.instrument (id, ticker) VALUES (DEFAULT, 'BA');
-INSERT INTO public.instrument (id, ticker) VALUES (DEFAULT, 'BABA');
-INSERT INTO public.instrument (id, ticker) VALUES (DEFAULT, 'IBM');
-INSERT INTO public.instrument (id, ticker) VALUES (DEFAULT, 'AMD');
-INSERT INTO public.instrument (id, ticker) VALUES (DEFAULT, 'COST');
-INSERT INTO public.instrument (id, ticker) VALUES (DEFAULT, 'XOM');
-INSERT INTO public.instrument (id, ticker) VALUES (DEFAULT, 'AMZN');
-INSERT INTO public.instrument (id, ticker) VALUES (DEFAULT, 'MS');
-INSERT INTO public.instrument (id, ticker) VALUES (DEFAULT, 'OXLC');
-INSERT INTO public.instrument (id, ticker) VALUES (DEFAULT, 'ZEN');
+INSERT INTO public.instrument (id, ticker, shortname) VALUES (DEFAULT, 'MSFT', 'Microsoft Corporation');
+INSERT INTO public.instrument (id, ticker, shortname) VALUES (DEFAULT, 'APPL', 'Apple Inc');
+INSERT INTO public.instrument (id, ticker, shortname) VALUES (DEFAULT, 'GM', 'General Motors');
+INSERT INTO public.instrument (id, ticker, shortname) VALUES (DEFAULT, 'F', 'Ford Motor Company');
+INSERT INTO public.instrument (id, ticker, shortname) VALUES (DEFAULT, 'MMM', '3M');
+INSERT INTO public.instrument (id, ticker, shortname) VALUES (DEFAULT, 'CAT', 'Caterpillar');
+INSERT INTO public.instrument (id, ticker, shortname) VALUES (DEFAULT, 'RWE', 'RWE AG');
+INSERT INTO public.instrument (id, ticker, shortname) VALUES (DEFAULT, 'BA', 'Boeing');
+INSERT INTO public.instrument (id, ticker, shortname) VALUES (DEFAULT, 'BABA', 'AliBaba');
+INSERT INTO public.instrument (id, ticker, shortname) VALUES (DEFAULT, 'IBM', 'International Business Machines');
+INSERT INTO public.instrument (id, ticker, shortname) VALUES (DEFAULT, 'AMD', 'Advanced Micro Devices');
+INSERT INTO public.instrument (id, ticker, shortname) VALUES (DEFAULT, 'COST', 'Costco');
+INSERT INTO public.instrument (id, ticker, shortname) VALUES (DEFAULT, 'XOM', 'ExXon Mobile');
+INSERT INTO public.instrument (id, ticker, shortname) VALUES (DEFAULT, 'AMZN', 'Amazon');
+INSERT INTO public.instrument (id, ticker, shortname) VALUES (DEFAULT, 'MS', 'Morgan Stanley');
+INSERT INTO public.instrument (id, ticker, shortname) VALUES (DEFAULT, 'OXLC', 'Oxford Lane Capital Corp');
+INSERT INTO public.instrument (id, ticker, shortname) VALUES (DEFAULT, 'ZEN', 'ZenDesk');
 
 INSERT INTO public.watchlist (id, user_id, instrument_id, price_higher, price_lower, user_comment, price_at_addition, addition_date)
 VALUES (DEFAULT, 2, 3, 105.00, 20.00, null, 50.00, DEFAULT);

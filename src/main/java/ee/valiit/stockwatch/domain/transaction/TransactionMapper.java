@@ -16,6 +16,8 @@ public interface TransactionMapper {
     @Mapping(source = "portfolio.id", target = "portfolioId")
     TransactionDto transactionDtoToTransaction(Transaction transaction);
 
+    @Mapping(source = "portfolio.instrument.shortname", target = "portfolioInstrumentTicker")
+    @Mapping(source = "portfolio.transactionFee", target = "transactionFee")
     @InheritInverseConfiguration(name = "transactionDtoToTransaction1")
     TransactionDto transactionToTransactionDto(Transaction transaction);
 
