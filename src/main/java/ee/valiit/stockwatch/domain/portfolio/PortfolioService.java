@@ -92,7 +92,6 @@ public class PortfolioService {
         return instrumentService.findInstrumentByTicker(portfolioRequest.getTicker());
     }
 
-
     public List<PortfolioResponse> getPortfolioInformation(Integer userId) {
         List<Portfolio> userPortfolios = portfolioRepository.findByUserId(userId); // Leiab kõik selle kasutaja portfellid
 
