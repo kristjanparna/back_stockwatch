@@ -4,6 +4,7 @@ package ee.valiit.stockwatch.domain.portfolio;
 import ee.valiit.stockwatch.business.portfolio.PortfolioRequest;
 import ee.valiit.stockwatch.business.portfolio.PortfolioResponse;
 import ee.valiit.stockwatch.domain.instrument.instrument.Instrument;
+import ee.valiit.stockwatch.domain.instrument.instrument.InstrumentResponse;
 import ee.valiit.stockwatch.domain.instrument.instrument.InstrumentService;
 import ee.valiit.stockwatch.domain.transaction.Transaction;
 import ee.valiit.stockwatch.domain.transaction.TransactionMapper;
@@ -16,8 +17,11 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
+
+import static java.math.BigDecimal.valueOf;
 
 @Service
 public class PortfolioService {
@@ -39,7 +43,6 @@ public class PortfolioService {
 
     @Resource
     private TransactionRepository transactionRepository;
-
 
     public void addInstrumentToPortfolio(PortfolioRequest portfolioRequest) {
         Instrument instrument = checkIfInstrumentExists(portfolioRequest);
@@ -89,49 +92,116 @@ public class PortfolioService {
         return instrumentService.findInstrumentByTicker(portfolioRequest.getTicker());
     }
 
-
-    public void getPortfolioInformation(Integer userId) {
+    public List<PortfolioResponse> getPortfolioInformation(Integer userId) {
         List<Portfolio> userPortfolios = portfolioRepository.findByUserId(userId); // Leiab kõik selle kasutaja portfellid
 
-        List<PortfolioResponse> responseList = new ArrayList<>(); // List kõikidest vastustest, mis tuleb Fronti saata
+        // List kõikidest vastustest, mis tuleb Fronti saata
+        List<PortfolioResponse> responseList = getResponses(userPortfolios);
 
-        for (Portfolio portfolio : userPortfolios) {
-            PortfolioResponse response = portfolioMapper.portfolioToPortfolioResponse(portfolio); // Teen portfelli põhjal vastuse
-            if (!responseList.contains(response)) { // Kui seda instrumenti vastuses ei ole, siis lisan
-                responseList.add(response);
+        // List unikaalsetest instrumentidest, mis on selle kasutaja portfellis
+        List<Instrument> instruments = getUniqueInstruments(userPortfolios);
+
+        // Panen iga vastuse külge tema totalTransactionFee
+        for (Instrument instrument : instruments) {
+            List<Portfolio> portfoliosOfOneInstrument = portfolioRepository.findBy(userId, instrument.getId());
+            float sum = 0.0F;
+            BigDecimal totalSum = BigDecimal.valueOf(sum).setScale(2, RoundingMode.HALF_UP);
+
+            for (Portfolio portfolio : portfoliosOfOneInstrument) { // Käin läbi kõik selle instrumendiga portfellid
+                if (portfolio.getTransactionFee() != null) {
+                    float transactionFee = portfolio.getTransactionFee().floatValue();
+                    sum += transactionFee; // Lisan selle instrumendi tehingutasu summasse
+                }
+            }
+            // Lisan instrumendi keskmise hinna response body õige elemendi sisse
+            for (PortfolioResponse response : responseList) {
+                for (Portfolio userPortfolio : userPortfolios) {
+                    if (userPortfolio.getInstrument().getTicker().equals(response.getTicker())) { // Vaatan, kas portfelli ticker on sama mis vastuse ticker
+                        response.setTotalTransactionFee(totalSum.floatValue()); // Kui on sama, siis lisame keskmise hinna vastusesse
+                    }
+                }
             }
         }
 
-        // Leian selle kasutaja portfellist kõik unikaalsed instrumendid
+        for (Instrument instrument : instruments) {
+            List<Portfolio> portfoliosOfOneInstrument = portfolioRepository.findBy(userId, instrument.getId());
+            float sumOfPrices = 0F;
+            int numberOfInstruments = 0;
+            float totalFeesPaid = 0;
+            for (Portfolio portfolio : portfoliosOfOneInstrument) { // Käin läbi kõik selle instrumendiga portfellid - Kõik selle kasutaja TSLA-d
+                List<Transaction> transactions = transactionRepository.findByPortfolioId(portfolio.getId());  // Kõik TSLA transactionid
+                if (portfolio.getTransactionFee() != null) {
+                    totalFeesPaid += portfolio.getTransactionFee().floatValue();
+                }
+                for (Transaction transaction : transactions) {
+                    float transactionPrice = portfolio.getTransactionPrice().floatValue();
+                    Integer amount = portfolio.getAmount();
+                    if (transaction.getTransactionTypeId() == 1) {
+                        sumOfPrices += transactionPrice;
+                        numberOfInstruments += amount;
+                    } else {
+                        sumOfPrices -= transactionPrice;
+                        numberOfInstruments -= amount;
+                    }
+                }
+            }
+            float averageTransactionPrice = sumOfPrices / portfoliosOfOneInstrument.size(); //Leian keskmise ostuhinna
+            float totalEarnings = averageTransactionPrice * numberOfInstruments - totalFeesPaid;
+            BigDecimal avgTransactionPrice = BigDecimal.valueOf(averageTransactionPrice).setScale(2,RoundingMode.HALF_UP);
+            // Lisan instrumendi koguse ja keskmise hinna response bodysse
+            for (PortfolioResponse response : responseList) {
+                if (response.getTicker().equals(instrument.getTicker())) {
+                    response.setAvgBuyingPrice(avgTransactionPrice.floatValue()); // Kui on sama, siis lisame keskmise hinna vastusesse
+                    response.setTotalAmount(numberOfInstruments);
+                    response.setTotalTransactionFee(totalFeesPaid);
+                    response.setEarning(totalEarnings);
+                }
+            }
+        }
 
-        List<Instrument> instruments = new ArrayList<>(); // List unikaalsetest instrumentidest, mis on selle kasutaja portfellis
+        for (Instrument instrument : instruments) {
+            InstrumentResponse instrument1 = instrumentService.getInstrumentByTicker(instrument.getTicker());
+            float currentPrice = instrument1.getCurrentPrice().floatValue();
+            for (PortfolioResponse response : responseList) {
+
+                float priceChangePercentage = instrument1.getCurrentPrice().floatValue() * 100 / response.getAvgBuyingPrice();
+                BigDecimal changePercentage = valueOf(priceChangePercentage).setScale(2, RoundingMode.HALF_UP);
+
+                float earning = response.getEarning();
+                Integer totalAmount = response.getTotalAmount();
+                earning = earning - (float) totalAmount * response.getCurrentPrice();
+                BigDecimal totalEarning = valueOf(earning).setScale(2, RoundingMode.HALF_UP);
+
+                if (response.getTicker().equals(instrument.getTicker())) {
+                    response.setCurrentPrice(currentPrice); // Kui on sama, siis lisame vastusesse
+                    response.setPriceChangePercentage(changePercentage.floatValue());
+                    response.setEarning(totalEarning.floatValue());
+                }
+            }
+        }
+
+        return responseList;
+    }
+
+    private static List<Instrument> getUniqueInstruments(List<Portfolio> userPortfolios) {
+        List<Instrument> instruments = new ArrayList<>();
         for (Portfolio userPortfolio : userPortfolios) {
             Instrument instrument = userPortfolio.getInstrument();
             if (!instruments.contains(instrument)) {
                 instruments.add(instrument);
             }
         }
+        return instruments;
+    }
 
-        // Käin läbi kõik instrumendid ja arvutan nende keskmise ostuhinna
-        for (Instrument instrument : instruments) {
-            List<Portfolio> portfoliosOfOneInstrument = portfolioRepository.findBy(userId, instrument.getId());
-            BigDecimal sum = new BigDecimal(0.0); // Ühe instrumendi keskmine hind
-            for (Portfolio portfolio : portfoliosOfOneInstrument) {
-                BigDecimal transactionPrice = portfolio.getTransactionPrice();
-                sum.add(transactionPrice);
-            }
-
-            // Lisan instrumendi keskmise hinna response body õige elemendi sisse
-            for (PortfolioResponse response : responseList) {
-                for (Portfolio userPortfolio : userPortfolios) {
-                    if (userPortfolio.getInstrument().getTicker().equals(response.getTicker())) { // Vaatan, kas portfelli ticker on sama mis vastuse ticker
-                        response.setAvgBuyingPrice(sum); // Kui on sama, siis lisame keskmise hinna vastusesse
-                    }
-                }
+    private List<PortfolioResponse> getResponses(List<Portfolio> userPortfolios) {
+        List<PortfolioResponse> responseList = new ArrayList<>();
+        for (Portfolio portfolio : userPortfolios) {
+            PortfolioResponse response = portfolioMapper.portfolioToPortfolioResponse(portfolio); // Teen portfelli põhjal vastuse
+            if (!responseList.contains(response)) { // Kui seda instrumenti vastuses ei ole, siis lisan
+                responseList.add(response);
             }
         }
-
-        System.out.println();
-
+        return responseList;
     }
 }

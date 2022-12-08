@@ -5,6 +5,7 @@ import ee.valiit.stockwatch.domain.portfolio.PortfolioService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @Service
 public class PortfolioManagementService {
@@ -20,7 +21,7 @@ public class PortfolioManagementService {
         portfolioService.reduceInPortfolio(portfolioRequest);
     }
 
-    public void getPortfolioInformation(Integer userId) {
-        portfolioService.getPortfolioInformation(userId);
+    public List<PortfolioResponse> getPortfolioInformation(Integer userId) {
+        return portfolioService.getPortfolioInformation(userId);
     }
 }
