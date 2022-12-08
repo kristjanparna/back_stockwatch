@@ -107,7 +107,7 @@ public class WatchlistService {
 
     private Instrument addInstrument(WatchlistRequest request) {
         Instrument instrument;
-        instrumentService.addNewInstrument(request.getTicker());
+        instrumentService.addNewInstrument(request.getTicker(), request.getShortName());
         instrument = instrumentService.findInstrumentByTicker(request.getTicker());
         return instrument;
     }

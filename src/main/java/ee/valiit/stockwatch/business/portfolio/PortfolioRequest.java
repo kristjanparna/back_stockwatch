@@ -28,4 +28,7 @@ public class PortfolioRequest implements Serializable {
     private LocalDate transactionDate;
     @NotNull
     private Integer transactionTypeId;
+    @Size(max = 255)
+    @NotNull
+    private String shortName;
 }

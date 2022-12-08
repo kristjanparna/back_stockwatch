@@ -48,11 +48,12 @@ public class InstrumentService {
         return instrumentResponse;
     }
 
-    public void addNewInstrument(String ticker) {
+    public void addNewInstrument(String ticker, String shortName) {
         Instrument instrument = new Instrument();
         List<Instrument> allInstruments = findAllInstruments();
         Validation.validateTickerExists(allInstruments, ticker);
         instrument.setTicker(ticker);
+        instrument.setShortname(shortName);
         instrumentRepository.save(instrument);
     }
 
