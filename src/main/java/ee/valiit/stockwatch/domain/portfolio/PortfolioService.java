@@ -4,6 +4,7 @@ package ee.valiit.stockwatch.domain.portfolio;
 import ee.valiit.stockwatch.business.portfolio.PortfolioRequest;
 import ee.valiit.stockwatch.business.portfolio.PortfolioResponse;
 import ee.valiit.stockwatch.domain.instrument.instrument.Instrument;
+import ee.valiit.stockwatch.domain.instrument.instrument.InstrumentResponse;
 import ee.valiit.stockwatch.domain.instrument.instrument.InstrumentService;
 import ee.valiit.stockwatch.domain.transaction.Transaction;
 import ee.valiit.stockwatch.domain.transaction.TransactionMapper;
@@ -85,7 +86,7 @@ public class PortfolioService {
     }
 
     private Instrument addInstrument(PortfolioRequest portfolioRequest) {
-        instrumentService.addNewInstrument(portfolioRequest.getTicker());
+        instrumentService.addNewInstrument(portfolioRequest.getTicker(), portfolioRequest.getShortName());
         return instrumentService.findInstrumentByTicker(portfolioRequest.getTicker());
     }
 
@@ -142,20 +143,32 @@ public class PortfolioService {
                 double transactionPrice = portfolio.getTransactionPrice().doubleValue();
                 sumOfTransactionPrices += transactionPrice; // Lisan selle instrumendi tehingutasu summasse
                 Integer amount = portfolio.getAmount();
-                numberOfInstruments += amount;
+                numberOfInstruments += amount; // Salvestan selle instrumendi koguse muutujasse
             }
-            double averageTransactionPrice = sumOfTransactionPrices / numberOfInstruments;
+            double averageTransactionPrice = sumOfTransactionPrices / numberOfInstruments; //Leian keskmise tehingutasu
 
-            // Lisan instrumendi keskmise hinna response body õige elemendi sisse
+            // Lisan instrumendi koguse ja keskmise hinna response bodysse
             for (PortfolioResponse response : responseList) {
-                for (Portfolio userPortfolio : userPortfolios) {
-                    if (userPortfolio.getInstrument().getTicker().equals(response.getTicker())) { // Vaatan, kas portfelli ticker on sama mis vastuse ticker
-                        response.setAvgBuyingPrice(averageTransactionPrice); // Kui on sama, siis lisame keskmise hinna vastusesse
-                        response.setTotalAmount(numberOfInstruments);
-                    }
+                if (response.getTicker().equals(instrument.getTicker())) {
+                    response.setAvgBuyingPrice(averageTransactionPrice); // Kui on sama, siis lisame keskmise hinna vastusesse
+                    response.setTotalAmount(numberOfInstruments);
                 }
             }
         }
+
+        for (Instrument instrument : instruments) {
+            InstrumentResponse instrument1 = instrumentService.getInstrumentByTicker(instrument.getTicker());
+            double currentPrice = instrument1.getCurrentPrice().doubleValue();
+            for (PortfolioResponse response : responseList) {
+                if (response.getTicker().equals(instrument.getTicker())) {
+                    response.setCurrentPrice(currentPrice); // Kui on sama, siis lisame praeguse hinna vastusesse
+                }
+            }
+        }
+
+
+
+
         System.out.println();
     }
 }
