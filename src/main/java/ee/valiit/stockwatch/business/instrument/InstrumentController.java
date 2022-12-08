@@ -18,14 +18,12 @@ public class InstrumentController {
     @GetMapping(value = "/ticker", produces = "application/json")
     @Operation(summary = "Tagastab nimekirja tickeri otsingu tulemustega")
     public List<Quote> getTickerInfo(String search) {
-        List<Quote> info = instrumentManagementService.getTickerInfo(search);
-        return info;
+        return instrumentManagementService.getTickerInfo(search);
     }
 
     @GetMapping(value = "/search", produces = "application/json")
     @Operation(summary = "Tagastab konkreetse instrumendi info välisest API'st")
     public InstrumentResponse getInstrument(String symbol) {
-        InstrumentResponse instrumentResponse = instrumentManagementService.getInstrument(symbol);
-        return instrumentResponse;
+        return instrumentManagementService.getInstrument(symbol);
     }
 }

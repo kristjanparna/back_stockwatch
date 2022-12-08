@@ -29,10 +29,4 @@ public class PortfolioController {
     public List<PortfolioResponse> getPortfolioInformation(Integer userId) {
         return portfolioManagementService.getPortfolioInformation(userId);
     }
-
-    @GetMapping("/portfolio/all")
-    @Operation(summary = "Tagastab kogu kasutaja portfelli väärtuse")
-    public float getTotalPortfolioValue(Integer userId) {
-        return portfolioManagementService.getTotalPortfolioValue(userId);
-    }
 }

@@ -44,8 +44,6 @@ public class PortfolioService {
     @Resource
     private TransactionRepository transactionRepository;
 
-    private float totalPortfolioValue;
-
     public void addInstrumentToPortfolio(PortfolioRequest portfolioRequest) {
         Instrument instrument = checkIfInstrumentExists(portfolioRequest);
         User user = userService.findUserById(portfolioRequest.getUserId());
@@ -149,7 +147,7 @@ public class PortfolioService {
             }
             float averageTransactionPrice = sumOfPrices / portfoliosOfOneInstrument.size(); //Leian keskmise ostuhinna
             float totalEarnings = averageTransactionPrice * numberOfInstruments - totalFeesPaid;
-            BigDecimal avgTransactionPrice = BigDecimal.valueOf(averageTransactionPrice).setScale(2,RoundingMode.HALF_UP);
+            BigDecimal avgTransactionPrice = BigDecimal.valueOf(averageTransactionPrice).setScale(2, RoundingMode.HALF_UP);
             // Lisan instrumendi koguse ja keskmise hinna response bodysse
             for (PortfolioResponse response : responseList) {
                 if (response.getTicker().equals(instrument.getTicker())) {
@@ -181,10 +179,16 @@ public class PortfolioService {
                 }
             }
         }
-
-        // Lisan kõik kasumid kohalikku muutujasse
+        float totalEarning = 0;
+        float totalWorth = 0;
         for (PortfolioResponse portfolioResponse : responseList) {
-            totalPortfolioValue += portfolioResponse.getEarning();
+            totalEarning += portfolioResponse.getEarning();
+            totalWorth += portfolioResponse.getEarning();
+        }
+
+        for (PortfolioResponse portfolioResponse : responseList) {
+            portfolioResponse.setEarning(totalEarning);
+            portfolioResponse.setPortfolioTotalWorth(totalWorth);
         }
 
         return responseList;
@@ -210,9 +214,5 @@ public class PortfolioService {
             }
         }
         return responseList;
-    }
-
-    public float getTotalPortfolioValue(Integer userId) {
-        return totalPortfolioValue;
     }
 }

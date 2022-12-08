@@ -33,6 +33,7 @@ public class WatchlistController {
     }
 
     @PutMapping("/watchlist")
+    @Operation(summary = "Uuendab kasutaja jälgimisnimekirja")
     public void updateWatchlist(@RequestBody WatchlistRequest request) {
         request.getId();
     }

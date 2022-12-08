@@ -23,6 +23,7 @@ public class PortfolioResponse implements Serializable {
     private float currentPrice;
     private float priceChangePercentage;
     private float earning;
-
+    private float portfolioTotalWorth;
+    private float portfolioTotalEarning;
 }
 
