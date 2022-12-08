@@ -112,26 +112,29 @@ public class PortfolioService {
             }
         }
 
-        // Käin läbi kõik instrumendid ja arvutan nende keskmise ostuhinna
+        // Panen iga vastuse külge tema totalTransactionFee
         for (Instrument instrument : instruments) {
             List<Portfolio> portfoliosOfOneInstrument = portfolioRepository.findBy(userId, instrument.getId());
-            BigDecimal sum = new BigDecimal(0.0); // Ühe instrumendi keskmine hind
-            for (Portfolio portfolio : portfoliosOfOneInstrument) {
-                BigDecimal transactionPrice = portfolio.getTransactionPrice();
-                sum.add(transactionPrice);
-            }
+            double sum = 0.0;
 
+            for (Portfolio portfolio : portfoliosOfOneInstrument) { // Käin läbi kõik selle instrumendiga portfellid
+                if (portfolio.getTransactionFee() != null) {
+                    double transactionFee = portfolio.getTransactionFee().doubleValue();
+                    sum += transactionFee; // Lisan selle instrumendi tehingutasu summasse
+                }
+            }
             // Lisan instrumendi keskmise hinna response body õige elemendi sisse
             for (PortfolioResponse response : responseList) {
                 for (Portfolio userPortfolio : userPortfolios) {
                     if (userPortfolio.getInstrument().getTicker().equals(response.getTicker())) { // Vaatan, kas portfelli ticker on sama mis vastuse ticker
-                        response.setAvgBuyingPrice(sum); // Kui on sama, siis lisame keskmise hinna vastusesse
+                        response.setTotalTransactionFee(sum); // Kui on sama, siis lisame keskmise hinna vastusesse
                     }
                 }
             }
         }
 
-        System.out.println();
+
+
 
     }
 }

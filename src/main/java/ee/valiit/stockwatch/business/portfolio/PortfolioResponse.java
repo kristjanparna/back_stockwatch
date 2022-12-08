@@ -17,8 +17,8 @@ public class PortfolioResponse implements Serializable {
     @NotNull
     private String ticker;
     private Integer totalAmount;
-    private BigDecimal totalTransactionFee;
-    private BigDecimal avgBuyingPrice;
+    private double totalTransactionFee;
+    private double avgBuyingPrice;
     private BigDecimal currentPrice;
     private BigDecimal priceChangePercentage;
     private BigDecimal earning;
