@@ -133,8 +133,29 @@ public class PortfolioService {
             }
         }
 
+        for (Instrument instrument : instruments) {
+            List<Portfolio> portfoliosOfOneInstrument = portfolioRepository.findBy(userId, instrument.getId());
+            double sumOfTransactionPrices = 0.0;
+            int numberOfInstruments = 0;
 
+            for (Portfolio portfolio : portfoliosOfOneInstrument) { // Käin läbi kõik selle instrumendiga portfellid
+                double transactionPrice = portfolio.getTransactionPrice().doubleValue();
+                sumOfTransactionPrices += transactionPrice; // Lisan selle instrumendi tehingutasu summasse
+                Integer amount = portfolio.getAmount();
+                numberOfInstruments += amount;
+            }
+            double averageTransactionPrice = sumOfTransactionPrices / numberOfInstruments;
 
-
+            // Lisan instrumendi keskmise hinna response body õige elemendi sisse
+            for (PortfolioResponse response : responseList) {
+                for (Portfolio userPortfolio : userPortfolios) {
+                    if (userPortfolio.getInstrument().getTicker().equals(response.getTicker())) { // Vaatan, kas portfelli ticker on sama mis vastuse ticker
+                        response.setAvgBuyingPrice(averageTransactionPrice); // Kui on sama, siis lisame keskmise hinna vastusesse
+                        response.setTotalAmount(numberOfInstruments);
+                    }
+                }
+            }
+        }
+        System.out.println();
     }
 }
