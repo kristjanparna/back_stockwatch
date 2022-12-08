@@ -44,6 +44,8 @@ public class PortfolioService {
     @Resource
     private TransactionRepository transactionRepository;
 
+    private float totalPortfolioValue;
+
     public void addInstrumentToPortfolio(PortfolioRequest portfolioRequest) {
         Instrument instrument = checkIfInstrumentExists(portfolioRequest);
         User user = userService.findUserById(portfolioRequest.getUserId());
@@ -180,6 +182,11 @@ public class PortfolioService {
             }
         }
 
+        // Lisan kõik kasumid kohalikku muutujasse
+        for (PortfolioResponse portfolioResponse : responseList) {
+            totalPortfolioValue += portfolioResponse.getEarning();
+        }
+
         return responseList;
     }
 
@@ -203,5 +210,9 @@ public class PortfolioService {
             }
         }
         return responseList;
+    }
+
+    public float getTotalPortfolioValue(Integer userId) {
+        return totalPortfolioValue;
     }
 }

@@ -24,4 +24,8 @@ public class PortfolioManagementService {
     public List<PortfolioResponse> getPortfolioInformation(Integer userId) {
         return portfolioService.getPortfolioInformation(userId);
     }
+
+    public float getTotalPortfolioValue(Integer userId) {
+        return portfolioService.getTotalPortfolioValue(userId);
+    }
 }

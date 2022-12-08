@@ -14,5 +14,6 @@ public interface PortfolioMapper {
     Portfolio portfolioRequestToPortfolio(PortfolioRequest portfolioRequest);
 
     @Mapping(source = "instrument.ticker", target = "ticker")
+    @Mapping(source = "instrument.shortname", target = "shortName")
     PortfolioResponse portfolioToPortfolioResponse(Portfolio portfolio);
 }
