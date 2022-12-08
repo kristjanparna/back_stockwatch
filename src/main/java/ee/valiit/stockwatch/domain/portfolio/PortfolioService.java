@@ -91,15 +91,18 @@ public class PortfolioService {
 
 
     public void getPortfolioInformation(Integer userId) {
-        List<Portfolio> userPortfolios = portfolioRepository.findBy(userId);
+        List<Portfolio> userPortfolios = portfolioRepository.findByUserId(userId); // Leiab kõik selle kasutaja portfellid
 
         List<PortfolioResponse> responseList = new ArrayList<>(); // List kõikidest vastustest, mis tuleb Fronti saata
+
         for (Portfolio portfolio : userPortfolios) {
-            PortfolioResponse response = portfolioMapper.portfolioToPortfolioResponse(portfolio);
-            responseList.add(response);
+            PortfolioResponse response = portfolioMapper.portfolioToPortfolioResponse(portfolio); // Teen portfelli põhjal vastuse
+            if (!responseList.contains(response)) { // Kui seda instrumenti vastuses ei ole, siis lisan
+                responseList.add(response);
+            }
         }
 
-        // TODO: find all tickers that are in one user's portfolio
+        // Leian selle kasutaja portfellist kõik unikaalsed instrumendid
 
         List<Instrument> instruments = new ArrayList<>(); // List unikaalsetest instrumentidest, mis on selle kasutaja portfellis
         for (Portfolio userPortfolio : userPortfolios) {
@@ -109,6 +112,7 @@ public class PortfolioService {
             }
         }
 
+        // Käin läbi kõik instrumendid ja arvutan nende keskmise ostuhinna
         for (Instrument instrument : instruments) {
             List<Portfolio> portfoliosOfOneInstrument = portfolioRepository.findBy(userId, instrument.getId());
             BigDecimal sum = new BigDecimal(0.0); // Ühe instrumendi keskmine hind
@@ -116,8 +120,8 @@ public class PortfolioService {
                 BigDecimal transactionPrice = portfolio.getTransactionPrice();
                 sum.add(transactionPrice);
             }
-            // TODO: Lisa instrumendi keskmine hind response body õige elemendi sisse
 
+            // Lisan instrumendi keskmise hinna response body õige elemendi sisse
             for (PortfolioResponse response : responseList) {
                 for (Portfolio userPortfolio : userPortfolios) {
                     if (userPortfolio.getInstrument().getTicker().equals(response.getTicker())) { // Vaatan, kas portfelli ticker on sama mis vastuse ticker
@@ -126,5 +130,8 @@ public class PortfolioService {
                 }
             }
         }
+
+        System.out.println();
+
     }
 }

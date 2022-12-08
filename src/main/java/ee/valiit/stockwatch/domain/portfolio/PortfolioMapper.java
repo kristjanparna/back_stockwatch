@@ -13,6 +13,6 @@ public interface PortfolioMapper {
     @Mapping(source = "userId", target = "user.id")
     Portfolio portfolioRequestToPortfolio(PortfolioRequest portfolioRequest);
 
-
+    @Mapping(source = "instrument.ticker", target = "ticker")
     PortfolioResponse portfolioToPortfolioResponse(Portfolio portfolio);
 }
