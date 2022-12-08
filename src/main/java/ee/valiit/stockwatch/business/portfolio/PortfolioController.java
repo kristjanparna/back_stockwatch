@@ -4,6 +4,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @RestController
 public class PortfolioController {
@@ -25,8 +26,8 @@ public class PortfolioController {
 
     @GetMapping("/portfolio")
     @Operation(summary = "Tagastab listi kasutaja portfellis olevate instrumentede infoga")
-    public void getPortfolioInformation(Integer userId) {
-        portfolioManagementService.getPortfolioInformation(userId);
+    public List<PortfolioResponse> getPortfolioInformation(Integer userId) {
+        return portfolioManagementService.getPortfolioInformation(userId);
     }
 
 }
