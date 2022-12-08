@@ -13,6 +13,7 @@ import java.math.BigDecimal;
  */
 @Data
 public class WatchlistRequest implements Serializable {
+    private Integer id;
     private String ticker;
     private Integer userId;
     private BigDecimal priceHigher;

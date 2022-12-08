@@ -21,7 +21,7 @@ public class WatchlistManagementService {
         return watchlistService.getWatchlistData(userId);
     }
 
-    public void removeFromWatchlist(String ticker) {
-        watchlistService.removeFromWatchlist(ticker);
+    public void removeFromWatchlist(Integer id) {
+        watchlistService.removeFromWatchlist(id);
     }
 }
