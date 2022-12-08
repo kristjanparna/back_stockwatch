@@ -43,6 +43,6 @@ public class Portfolio {
 
     @NotNull
     @Column(name = "purchase_date", nullable = false)
-    private LocalDate purchaseDate;
+    private LocalDate transactionDate;
 
 }

@@ -9,7 +9,7 @@ import org.mapstruct.ReportingPolicy;
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = "spring")
 public interface TransactionMapper {
     @Mapping(source = "transactionPrice", target = "price")
-    @Mapping(source = "purchaseDate", target = "date")
+    @Mapping(source = "transactionDate", target = "date")
     @Mapping(source = "transactionTypeId", target = "transactionTypeId")
     Transaction portfolioRequestToTransaction(PortfolioRequest portfolioRequest);
 
@@ -20,4 +20,5 @@ public interface TransactionMapper {
     @Mapping(source = "portfolio.transactionFee", target = "transactionFee")
     @InheritInverseConfiguration(name = "transactionDtoToTransaction1")
     TransactionDto transactionToTransactionDto(Transaction transaction);
+
 }

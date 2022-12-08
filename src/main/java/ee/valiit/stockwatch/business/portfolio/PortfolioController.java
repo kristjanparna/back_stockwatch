@@ -22,4 +22,11 @@ public class PortfolioController {
     public void reduceTickerAmount(@RequestBody PortfolioRequest portfolioRequest) {
         portfolioManagementService.reduceInPortfolio(portfolioRequest);
     }
+
+    @GetMapping("/portfolio")
+    @Operation(summary = "Tagastab listi kasutaja portfellis olevate instrumentede infoga")
+    public void getPortfolioInformation(Integer userId) {
+        portfolioManagementService.getPortfolioInformation(userId);
+    }
+
 }

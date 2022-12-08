@@ -11,8 +11,8 @@ public enum StockwatchError {
     CANNOT_DEACTIVATE_ADMIN("Administraatori kontot ei saa deaktiveerida", "005"),
     TICKER_EXISTS("Ühte instrumenti ei saa tabelisse kaks korda lisada", "006"),
     TICKER_IN_WATCHLIST("See instrument on juba lisatud sinu nimekirja", "007"),
-
-    TICKER_IN_PORTFOLIO("See insturment on juba lisatud sinu portfelli", "008");
+    TICKER_IN_PORTFOLIO("See insturment on juba lisatud sinu portfelli", "008"),
+    NOT_ENOUGH_INSTRUMENTS("Sinu portfellis ei ole piisavalt seda instrumenti", "009");
 
 
 

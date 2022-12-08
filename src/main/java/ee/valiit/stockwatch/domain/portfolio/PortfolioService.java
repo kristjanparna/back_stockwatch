@@ -2,6 +2,7 @@ package ee.valiit.stockwatch.domain.portfolio;
 
 
 import ee.valiit.stockwatch.business.portfolio.PortfolioRequest;
+import ee.valiit.stockwatch.business.portfolio.PortfolioResponse;
 import ee.valiit.stockwatch.domain.instrument.instrument.Instrument;
 import ee.valiit.stockwatch.domain.instrument.instrument.InstrumentService;
 import ee.valiit.stockwatch.domain.transaction.Transaction;
@@ -9,10 +10,13 @@ import ee.valiit.stockwatch.domain.transaction.TransactionMapper;
 import ee.valiit.stockwatch.domain.transaction.TransactionRepository;
 import ee.valiit.stockwatch.domain.user.user.User;
 import ee.valiit.stockwatch.domain.user.user.UserService;
+import ee.valiit.stockwatch.infrastructure.exception.BusinessException;
+import ee.valiit.stockwatch.validation.StockwatchError;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.time.LocalDate;
+import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -38,63 +42,96 @@ public class PortfolioService {
 
 
     public void addInstrumentToPortfolio(PortfolioRequest portfolioRequest) {
-        Instrument instrument = new Instrument();
-        List<Instrument> allInstruments = instrumentService.findAllInstruments();
-        instrument = checkIfInstrumentExists(portfolioRequest, instrument, allInstruments);
+        Instrument instrument = checkIfInstrumentExists(portfolioRequest);
+        User user = userService.findUserById(portfolioRequest.getUserId());
         Portfolio portfolio = portfolioMapper.portfolioRequestToPortfolio(portfolioRequest);
-        createNewPortfolioItem(portfolioRequest, instrument, portfolio);
+        portfolio.setInstrument(instrument);
+        portfolio.setUser(user);
         portfolioRepository.save(portfolio);
         addTransactionHistory(portfolioRequest, portfolio);
     }
+
     public void reduceInPortfolio(PortfolioRequest portfolioRequest) {
-        Instrument instrument = new Instrument();
-        List<Instrument> allInstruments = instrumentService.findAllInstruments();
-        instrument = checkIfInstrumentExists(portfolioRequest, instrument, allInstruments);
-        Portfolio portfolio = portfolioMapper.portfolioRequestToPortfolio(portfolioRequest);
-        createNewPortfolioItem(portfolioRequest, instrument, portfolio);
-        portfolioRepository.save(portfolio);
-        addTransactionHistory(portfolioRequest, portfolio);
+        Instrument instrument = instrumentService.findInstrumentByTicker(portfolioRequest.getTicker());
+        List<Portfolio> portfoliosByInstrument = portfolioRepository.findBy(portfolioRequest.getUserId(), instrument.getId());
+
+        Integer totalInstrumentAmount = 0;
+        for (Portfolio portfolio : portfoliosByInstrument) {
+            Integer amount = portfolio.getAmount();
+            totalInstrumentAmount += amount;
+        }
+
+        if (totalInstrumentAmount < portfolioRequest.getAmount()) {
+            throw new BusinessException(StockwatchError.NOT_ENOUGH_INSTRUMENTS.getMessage(), StockwatchError.NOT_ENOUGH_INSTRUMENTS.getErrorCode());
+        } else {
+            addInstrumentToPortfolio(portfolioRequest);
+        }
     }
 
     private void addTransactionHistory(PortfolioRequest portfolioRequest, Portfolio portfolio) {
         Transaction transaction = transactionMapper.portfolioRequestToTransaction(portfolioRequest);
-        transactionMapper.transactionDtoToTransaction(transaction);
-        createNewTransaction(portfolioRequest, transaction, portfolio);
+        transaction.setPortfolio(portfolio);
         transactionRepository.save(transaction);
     }
 
-    private void createNewTransaction(PortfolioRequest portfolioRequest, Transaction transaction, Portfolio portfolio) {
-        transaction.setPortfolio(portfolio);
-        transaction.setPrice(portfolioRequest.getTransactionPrice());
-        transaction.setAmount(portfolioRequest.getAmount());
-        transaction.setDate(LocalDate.now());
-    }
-
-    private void createNewPortfolioItem(PortfolioRequest portfolioRequest, Instrument instrument, Portfolio portfolio) {
-        User user = userService.findUserById(portfolioRequest.getUserId());
-        portfolio.setUser(user);
-        portfolio.setPurchaseDate(LocalDate.now());
-        portfolio.setInstrument(instrument);
-    }
-
-    private Instrument checkIfInstrumentExists(PortfolioRequest portfolioRequest, Instrument instrument, List<Instrument> allInstruments) {
+    private Instrument checkIfInstrumentExists(PortfolioRequest portfolioRequest) {
+        List<Instrument> allInstruments = instrumentService.findAllInstruments();
         for (Instrument existingInstrument : allInstruments) {
             if (existingInstrument.getTicker().equals(portfolioRequest.getTicker())) {
-                instrument = existingInstrument;
+                return existingInstrument;
             }
         }
-        if (instrument.getTicker() == null) {
-            instrument = addInstrument(portfolioRequest);
-        }
-        return instrument;
+        return addInstrument(portfolioRequest);
     }
 
     private Instrument addInstrument(PortfolioRequest portfolioRequest) {
-        Instrument instrument;
-        instrumentService.addNewInstrument(portfolioRequest.getTicker(), portfolioRequest.getShortName());
-        instrument = instrumentService.findInstrumentByTicker(portfolioRequest.getTicker());
-        return instrument;
+        instrumentService.addNewInstrument(portfolioRequest.getTicker());
+        return instrumentService.findInstrumentByTicker(portfolioRequest.getTicker());
     }
 
 
+    public void getPortfolioInformation(Integer userId) {
+        List<Portfolio> userPortfolios = portfolioRepository.findByUserId(userId); // Leiab kõik selle kasutaja portfellid
+
+        List<PortfolioResponse> responseList = new ArrayList<>(); // List kõikidest vastustest, mis tuleb Fronti saata
+
+        for (Portfolio portfolio : userPortfolios) {
+            PortfolioResponse response = portfolioMapper.portfolioToPortfolioResponse(portfolio); // Teen portfelli põhjal vastuse
+            if (!responseList.contains(response)) { // Kui seda instrumenti vastuses ei ole, siis lisan
+                responseList.add(response);
+            }
+        }
+
+        // Leian selle kasutaja portfellist kõik unikaalsed instrumendid
+
+        List<Instrument> instruments = new ArrayList<>(); // List unikaalsetest instrumentidest, mis on selle kasutaja portfellis
+        for (Portfolio userPortfolio : userPortfolios) {
+            Instrument instrument = userPortfolio.getInstrument();
+            if (!instruments.contains(instrument)) {
+                instruments.add(instrument);
+            }
+        }
+
+        // Käin läbi kõik instrumendid ja arvutan nende keskmise ostuhinna
+        for (Instrument instrument : instruments) {
+            List<Portfolio> portfoliosOfOneInstrument = portfolioRepository.findBy(userId, instrument.getId());
+            BigDecimal sum = new BigDecimal(0.0); // Ühe instrumendi keskmine hind
+            for (Portfolio portfolio : portfoliosOfOneInstrument) {
+                BigDecimal transactionPrice = portfolio.getTransactionPrice();
+                sum.add(transactionPrice);
+            }
+
+            // Lisan instrumendi keskmise hinna response body õige elemendi sisse
+            for (PortfolioResponse response : responseList) {
+                for (Portfolio userPortfolio : userPortfolios) {
+                    if (userPortfolio.getInstrument().getTicker().equals(response.getTicker())) { // Vaatan, kas portfelli ticker on sama mis vastuse ticker
+                        response.setAvgBuyingPrice(sum); // Kui on sama, siis lisame keskmise hinna vastusesse
+                    }
+                }
+            }
+        }
+
+        System.out.println();
+
+    }
 }
