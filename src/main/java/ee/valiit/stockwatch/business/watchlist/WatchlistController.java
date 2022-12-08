@@ -32,8 +32,4 @@ public class WatchlistController {
         watchlistManagementService.removeFromWatchlist(id);
     }
 
-    @PutMapping("/watchlist")
-    public void updateWatchlist(@RequestBody WatchlistRequest request) {
-        request.getId();
-    }
 }
