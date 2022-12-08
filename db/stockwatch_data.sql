@@ -83,19 +83,19 @@ INSERT INTO public.watchlist (id, user_id, instrument_id, price_higher, price_lo
 VALUES (DEFAULT, 5, 5, 120.00, 20.00, null, 60.00, DEFAULT);
 
 INSERT INTO public.portfolio (id, user_id, instrument_id, purchase_price, amount, transaction_fee, purchase_date)
-VALUES (DEFAULT, 2, 9, 120.00, 60, 5.00, DEFAULT);
+VALUES (DEFAULT, 2, 9, 120.00, 60, 5.00, '2022-11-01');
 INSERT INTO public.portfolio (id, user_id, instrument_id, purchase_price, amount, transaction_fee, purchase_date)
-VALUES (DEFAULT, 2, 13, 15.00, 10, null, DEFAULT);
+VALUES (DEFAULT, 2, 13, 15.00, 10, null, '2022-05-30');
 INSERT INTO public.portfolio (id, user_id, instrument_id, purchase_price, amount, transaction_fee, purchase_date)
-VALUES (DEFAULT, 2, 10, 120.00, 60, 5.00, DEFAULT);
+VALUES (DEFAULT, 2, 10, 120.00, 60, 5.00, '2022-10-30');
 INSERT INTO public.portfolio (id, user_id, instrument_id, purchase_price, amount, transaction_fee, purchase_date)
-VALUES (DEFAULT, 2, 11, 15.00, 10, null, DEFAULT);
+VALUES (DEFAULT, 2, 11, 15.00, 10, null, '2022-12-05');
 INSERT INTO public.portfolio (id, user_id, instrument_id, purchase_price, amount, transaction_fee, purchase_date)
 VALUES (DEFAULT, 1, 9, 120.00, 60, 5.00, DEFAULT);
 INSERT INTO public.portfolio (id, user_id, instrument_id, purchase_price, amount, transaction_fee, purchase_date)
 VALUES (DEFAULT, 1, 13, 15.00, 10, null, DEFAULT);
 INSERT INTO public.portfolio (id, user_id, instrument_id, purchase_price, amount, transaction_fee, purchase_date)
-VALUES (DEFAULT, 2, 9, 120.00, 60, 5.00, DEFAULT);
+VALUES (DEFAULT, 2, 9, 120.00, 60, 5.00, '2021-04-27');
 INSERT INTO public.portfolio (id, user_id, instrument_id, purchase_price, amount, transaction_fee, purchase_date)
 VALUES (DEFAULT, 2, 15, 15.00, 10, null, DEFAULT);
 INSERT INTO public.portfolio (id, user_id, instrument_id, purchase_price, amount, transaction_fee, purchase_date)
@@ -105,22 +105,22 @@ VALUES (DEFAULT, 1, 15, 15.00, 10, null, DEFAULT);
 INSERT INTO public.portfolio (id, user_id, instrument_id, purchase_price, amount, transaction_fee, purchase_date)
 VALUES (DEFAULT, 2, 19, 18.00, 10, null, DEFAULT);
 INSERT INTO public.portfolio (id, user_id, instrument_id, purchase_price, amount, transaction_fee, purchase_date)
-VALUES (DEFAULT, 2, 9, 120, 60, 10, DEFAULT);
+VALUES (DEFAULT, 2, 9, 120, 60, 10, '2022-11-15');
 
 INSERT INTO public.transaction (id, portfolio_id, transaction_type_id, amount, price, date)
-VALUES (DEFAULT, 1, 1, 60, 120.00, DEFAULT);
+VALUES (DEFAULT, 1, 1, 60, 120.00, '2022-11-01');
 INSERT INTO public.transaction (id, portfolio_id, transaction_type_id, amount, price, date)
-VALUES (DEFAULT, 2, 1, 10, 15.00, DEFAULT);
+VALUES (DEFAULT, 2, 1, 10, 15.00, '2022-05-30');
 INSERT INTO public.transaction (id, portfolio_id, transaction_type_id, amount, price, date)
-VALUES (DEFAULT, 3, 1, 60, 120.00, DEFAULT);
+VALUES (DEFAULT, 3, 1, 60, 120.00, '2022-10-30');
 INSERT INTO public.transaction (id, portfolio_id, transaction_type_id, amount, price, date)
-VALUES (DEFAULT, 4, 1, 10, 15.00, DEFAULT);
+VALUES (DEFAULT, 4, 1, 10, 15.00, '2022-12-05');
 INSERT INTO public.transaction (id, portfolio_id, transaction_type_id, amount, price, date)
 VALUES (DEFAULT, 5, 1, 60, 120.00, DEFAULT);
 INSERT INTO public.transaction (id, portfolio_id, transaction_type_id, amount, price, date)
 VALUES (DEFAULT, 6, 1, 10, 15.00, DEFAULT);
 INSERT INTO public.transaction (id, portfolio_id, transaction_type_id, amount, price, date)
-VALUES (DEFAULT, 7, 1, 60, 120.00, DEFAULT);
+VALUES (DEFAULT, 7, 1, 60, 120.00, '2021-04-27');
 INSERT INTO public.transaction (id, portfolio_id, transaction_type_id, amount, price, date)
 VALUES (DEFAULT, 8, 1, 10, 15.00, DEFAULT);
 INSERT INTO public.transaction (id, portfolio_id, transaction_type_id, amount, price, date)
@@ -130,6 +130,6 @@ VALUES (DEFAULT, 10, 1, 10, 15.00, DEFAULT);
 INSERT INTO public.transaction (id, portfolio_id, transaction_type_id, amount, price, date)
 VALUES (DEFAULT, 11, 1, 10, 18.00, DEFAULT);
 INSERT INTO public.transaction (id, portfolio_id, transaction_type_id, amount, price, date)
-VALUES (DEFAULT, 12, 2, 9, 120, DEFAULT);
+VALUES (DEFAULT, 12, 2, 9, 120, '2022-11-15');
 
 
