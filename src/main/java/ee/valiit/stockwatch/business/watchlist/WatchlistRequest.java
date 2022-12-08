@@ -21,4 +21,7 @@ public class WatchlistRequest implements Serializable {
     private String userComment;
     @NotNull
     private BigDecimal priceAtAddition;
+    @Size(max = 255)
+    @NotNull
+    private String shortName;
 }
