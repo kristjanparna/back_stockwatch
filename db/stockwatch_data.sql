@@ -3,6 +3,9 @@ VALUES (DEFAULT, 'admin');
 INSERT INTO public.role (id, type)
 VALUES (DEFAULT, 'customer');
 
+INSERT INTO public.transaction_type (id, name) VALUES (DEFAULT, 'buy');
+INSERT INTO public.transaction_type (id, name) VALUES (DEFAULT, 'sell');
+
 INSERT INTO public.contact (id, first_name, last_name, email, start, "end")
 VALUES (DEFAULT, 'Andres', 'Orgla', 'andres@email.com', DEFAULT, NULL);
 INSERT INTO public.contact (id, first_name, last_name, email, start, "end")
@@ -60,6 +63,9 @@ INSERT INTO public.instrument (id, ticker, shortname) VALUES (DEFAULT, 'AMZN', '
 INSERT INTO public.instrument (id, ticker, shortname) VALUES (DEFAULT, 'MS', 'Morgan Stanley');
 INSERT INTO public.instrument (id, ticker, shortname) VALUES (DEFAULT, 'OXLC', 'Oxford Lane Capital Corp');
 INSERT INTO public.instrument (id, ticker, shortname) VALUES (DEFAULT, 'ZEN', 'ZenDesk');
+INSERT INTO public.instrument (id, ticker, shortname) VALUES (DEFAULT, 'ZIM', 'ZIM Integrated Shipping');
+INSERT INTO public.instrument (id, ticker, shortname) VALUES (DEFAULT, 'MVIS', 'MicroVision');
+INSERT INTO public.instrument (id, ticker, shortname) VALUES (DEFAULT, 'NVDA', 'Nvidia');
 
 INSERT INTO public.watchlist (id, user_id, instrument_id, price_higher, price_lower, user_comment, price_at_addition, addition_date)
 VALUES (DEFAULT, 2, 3, 105.00, 20.00, null, 50.00, DEFAULT);
@@ -77,10 +83,53 @@ INSERT INTO public.watchlist (id, user_id, instrument_id, price_higher, price_lo
 VALUES (DEFAULT, 5, 5, 120.00, 20.00, null, 60.00, DEFAULT);
 
 INSERT INTO public.portfolio (id, user_id, instrument_id, purchase_price, amount, transaction_fee, purchase_date)
+VALUES (DEFAULT, 2, 9, 120.00, 60, 5.00, DEFAULT);
+INSERT INTO public.portfolio (id, user_id, instrument_id, purchase_price, amount, transaction_fee, purchase_date)
+VALUES (DEFAULT, 2, 13, 15.00, 10, null, DEFAULT);
+INSERT INTO public.portfolio (id, user_id, instrument_id, purchase_price, amount, transaction_fee, purchase_date)
 VALUES (DEFAULT, 2, 10, 120.00, 60, 5.00, DEFAULT);
-
 INSERT INTO public.portfolio (id, user_id, instrument_id, purchase_price, amount, transaction_fee, purchase_date)
 VALUES (DEFAULT, 2, 11, 15.00, 10, null, DEFAULT);
+INSERT INTO public.portfolio (id, user_id, instrument_id, purchase_price, amount, transaction_fee, purchase_date)
+VALUES (DEFAULT, 1, 9, 120.00, 60, 5.00, DEFAULT);
+INSERT INTO public.portfolio (id, user_id, instrument_id, purchase_price, amount, transaction_fee, purchase_date)
+VALUES (DEFAULT, 1, 13, 15.00, 10, null, DEFAULT);
+INSERT INTO public.portfolio (id, user_id, instrument_id, purchase_price, amount, transaction_fee, purchase_date)
+VALUES (DEFAULT, 2, 9, 120.00, 60, 5.00, DEFAULT);
+INSERT INTO public.portfolio (id, user_id, instrument_id, purchase_price, amount, transaction_fee, purchase_date)
+VALUES (DEFAULT, 2, 15, 15.00, 10, null, DEFAULT);
+INSERT INTO public.portfolio (id, user_id, instrument_id, purchase_price, amount, transaction_fee, purchase_date)
+VALUES (DEFAULT, 1, 7, 120.00, 60, 5.00, DEFAULT);
+INSERT INTO public.portfolio (id, user_id, instrument_id, purchase_price, amount, transaction_fee, purchase_date)
+VALUES (DEFAULT, 1, 15, 15.00, 10, null, DEFAULT);
+INSERT INTO public.portfolio (id, user_id, instrument_id, purchase_price, amount, transaction_fee, purchase_date)
+VALUES (DEFAULT, 2, 19, 18.00, 10, null, DEFAULT);
+INSERT INTO public.portfolio (id, user_id, instrument_id, purchase_price, amount, transaction_fee, purchase_date)
+VALUES (DEFAULT, 2, 9, 120, 60, 10, DEFAULT);
 
-INSERT INTO public.transaction_type (id, name) VALUES (DEFAULT, 'buy');
-INSERT INTO public.transaction_type (id, name) VALUES (DEFAULT, 'sell');
+INSERT INTO public.transaction (id, portfolio_id, transaction_type_id, amount, price, date)
+VALUES (DEFAULT, 1, 1, 60, 120.00, DEFAULT);
+INSERT INTO public.transaction (id, portfolio_id, transaction_type_id, amount, price, date)
+VALUES (DEFAULT, 2, 1, 10, 15.00, DEFAULT);
+INSERT INTO public.transaction (id, portfolio_id, transaction_type_id, amount, price, date)
+VALUES (DEFAULT, 3, 1, 60, 120.00, DEFAULT);
+INSERT INTO public.transaction (id, portfolio_id, transaction_type_id, amount, price, date)
+VALUES (DEFAULT, 4, 1, 10, 15.00, DEFAULT);
+INSERT INTO public.transaction (id, portfolio_id, transaction_type_id, amount, price, date)
+VALUES (DEFAULT, 5, 1, 60, 120.00, DEFAULT);
+INSERT INTO public.transaction (id, portfolio_id, transaction_type_id, amount, price, date)
+VALUES (DEFAULT, 6, 1, 10, 15.00, DEFAULT);
+INSERT INTO public.transaction (id, portfolio_id, transaction_type_id, amount, price, date)
+VALUES (DEFAULT, 7, 1, 60, 120.00, DEFAULT);
+INSERT INTO public.transaction (id, portfolio_id, transaction_type_id, amount, price, date)
+VALUES (DEFAULT, 8, 1, 10, 15.00, DEFAULT);
+INSERT INTO public.transaction (id, portfolio_id, transaction_type_id, amount, price, date)
+VALUES (DEFAULT, 9, 1, 60, 120.00, DEFAULT);
+INSERT INTO public.transaction (id, portfolio_id, transaction_type_id, amount, price, date)
+VALUES (DEFAULT, 10, 1, 10, 15.00, DEFAULT);
+INSERT INTO public.transaction (id, portfolio_id, transaction_type_id, amount, price, date)
+VALUES (DEFAULT, 11, 1, 10, 18.00, DEFAULT);
+INSERT INTO public.transaction (id, portfolio_id, transaction_type_id, amount, price, date)
+VALUES (DEFAULT, 12, 2, 9, 120, DEFAULT);
+
+
