@@ -67,11 +67,6 @@ public class PortfolioService {
         if (totalInstrumentAmount < portfolioRequest.getAmount()) {
             throw new BusinessException(StockwatchError.NOT_ENOUGH_INSTRUMENTS.getMessage(), StockwatchError.NOT_ENOUGH_INSTRUMENTS.getErrorCode());
         } else {
-
-            //TODO: ära lisa instrumenti portfelli vaid muuda kogust
-
-
-
             addInstrumentToPortfolio(portfolioRequest);
         }
     }
@@ -111,7 +106,7 @@ public class PortfolioService {
         for (Instrument instrument : instruments) {
             List<Portfolio> portfoliosOfOneInstrument = portfolioRepository.findBy(userId, instrument.getId());
             float sum = 0.0F;
-            BigDecimal totalSum = new BigDecimal(sum).setScale(2, RoundingMode.HALF_UP);
+            BigDecimal totalSum = BigDecimal.valueOf(sum).setScale(2, RoundingMode.HALF_UP);
 
             for (Portfolio portfolio : portfoliosOfOneInstrument) { // Käin läbi kõik selle instrumendiga portfellid
                 if (portfolio.getTransactionFee() != null) {
@@ -131,26 +126,36 @@ public class PortfolioService {
 
         for (Instrument instrument : instruments) {
             List<Portfolio> portfoliosOfOneInstrument = portfolioRepository.findBy(userId, instrument.getId());
-            float sumOfTransactionPrices = 0F;
+            float sumOfPrices = 0F;
             int numberOfInstruments = 0;
-
-            for (Portfolio portfolio : portfoliosOfOneInstrument) { // Käin läbi kõik selle instrumendiga portfellid
-                float transactionPrice = portfolio.getTransactionPrice().floatValue();
-
-// TODO: Küsi selle transactioni tüüp ja liida või lahuta see sumOfTransactionPrices'ele
-
-                sumOfTransactionPrices += transactionPrice; // Lisan selle instrumendi tehingutasu summasse
-                Integer amount = portfolio.getAmount();
-                numberOfInstruments += amount; // Salvestan selle instrumendi koguse muutujasse
+            float totalFeesPaid = 0;
+            for (Portfolio portfolio : portfoliosOfOneInstrument) { // Käin läbi kõik selle instrumendiga portfellid - Kõik selle kasutaja TSLA-d
+                List<Transaction> transactions = transactionRepository.findByPortfolioId(portfolio.getId());  // Kõik TSLA transactionid
+                if (portfolio.getTransactionFee() != null) {
+                    totalFeesPaid += portfolio.getTransactionFee().floatValue();
+                }
+                for (Transaction transaction : transactions) {
+                    float transactionPrice = portfolio.getTransactionPrice().floatValue();
+                    Integer amount = portfolio.getAmount();
+                    if (transaction.getTransactionTypeId() == 1) {
+                        sumOfPrices += transactionPrice;
+                        numberOfInstruments += amount;
+                    } else {
+                        sumOfPrices -= transactionPrice;
+                        numberOfInstruments -= amount;
+                    }
+                }
             }
-            float averageTransactionPrice = sumOfTransactionPrices / numberOfInstruments; //Leian keskmise tehingutasu
-            BigDecimal avgTransactionPrice = new BigDecimal(averageTransactionPrice).setScale(2, RoundingMode.HALF_UP);
-
+            float averageTransactionPrice = sumOfPrices / portfoliosOfOneInstrument.size(); //Leian keskmise ostuhinna
+            float totalEarnings = averageTransactionPrice * numberOfInstruments - totalFeesPaid;
+            BigDecimal avgTransactionPrice = BigDecimal.valueOf(averageTransactionPrice).setScale(2,RoundingMode.HALF_UP);
             // Lisan instrumendi koguse ja keskmise hinna response bodysse
             for (PortfolioResponse response : responseList) {
                 if (response.getTicker().equals(instrument.getTicker())) {
                     response.setAvgBuyingPrice(avgTransactionPrice.floatValue()); // Kui on sama, siis lisame keskmise hinna vastusesse
                     response.setTotalAmount(numberOfInstruments);
+                    response.setTotalTransactionFee(totalFeesPaid);
+                    response.setEarning(totalEarnings);
                 }
             }
         }
@@ -159,10 +164,13 @@ public class PortfolioService {
             InstrumentResponse instrument1 = instrumentService.getInstrumentByTicker(instrument.getTicker());
             float currentPrice = instrument1.getCurrentPrice().floatValue();
             for (PortfolioResponse response : responseList) {
-                float priceChangePercentage = response.getAvgBuyingPrice() / instrument1.getCurrentPrice().floatValue() * 100;
+
+                float priceChangePercentage = instrument1.getCurrentPrice().floatValue() * 100 / response.getAvgBuyingPrice();
                 BigDecimal changePercentage = valueOf(priceChangePercentage).setScale(2, RoundingMode.HALF_UP);
 
-                float earning = instrument1.getCurrentPrice().floatValue() - response.getCurrentPrice();
+                float earning = response.getEarning();
+                Integer totalAmount = response.getTotalAmount();
+                earning = earning - (float) totalAmount * response.getCurrentPrice();
                 BigDecimal totalEarning = valueOf(earning).setScale(2, RoundingMode.HALF_UP);
 
                 if (response.getTicker().equals(instrument.getTicker())) {

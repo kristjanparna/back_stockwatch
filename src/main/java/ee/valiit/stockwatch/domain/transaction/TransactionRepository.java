@@ -21,4 +21,8 @@ public interface TransactionRepository extends JpaRepository<Transaction, Intege
     @Query("select t from Transaction t where t.portfolio.user.id = ?1 and t.date between ?2 and ?3")
     List<Transaction> findByUserIdAndDate(Integer id, LocalDate dateStart, LocalDate dateEnd);
 
+    @Query("select t from Transaction t where t.portfolio.id = ?1")
+    List<Transaction> findByPortfolioId(Integer id);
+
+
 }
