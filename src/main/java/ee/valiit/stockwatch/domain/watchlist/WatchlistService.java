@@ -72,7 +72,6 @@ public class WatchlistService {
         instrument = checkIfInstrumentExists(request, instrument, allInstruments);
         Watchlist watchlist = watchlistMapper.watchlistRequestToWatchlist(request);
         createNewWatchlistItem(request, instrument, allInstruments, watchlist);
-
         watchlistRepository.save(watchlist);
     }
 
@@ -115,5 +114,6 @@ public class WatchlistService {
 
     public void removeFromWatchlist(Integer id) {
         watchlistRepository.deleteById(id);
+
     }
 }

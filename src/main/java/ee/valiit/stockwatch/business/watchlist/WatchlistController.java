@@ -13,6 +13,7 @@ public class WatchlistController {
     @Resource
     private WatchlistManagementService watchlistManagementService;
 
+
     @PostMapping(value = "/watchlist")
     @Operation(summary = "Lisab kasutaja valitud instrumendi watchlisti")
     public void addInstrumentToWatchlist(@RequestBody WatchlistRequest request) {
@@ -29,5 +30,10 @@ public class WatchlistController {
     @Operation(summary = "Eemaldab instrumendi jälgimisnimekirjast")
     public void removeFromWatchlist(Integer id) {
         watchlistManagementService.removeFromWatchlist(id);
+    }
+
+    @PutMapping("/watchlist")
+    public void updateWatchlist(@RequestBody WatchlistRequest request) {
+        request.getId();
     }
 }
