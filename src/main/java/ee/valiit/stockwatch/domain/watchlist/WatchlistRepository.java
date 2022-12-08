@@ -11,6 +11,8 @@ public interface WatchlistRepository extends org.springframework.data.jpa.reposi
     @Query("select w from Watchlist w where w.user.id = ?1")
     Watchlist findByUserId(Integer id);
 
+
+
     @Query("select w from Watchlist w where w.user.id = ?1")
     List<Watchlist> findAllByUserId(Integer id);
 
@@ -19,5 +21,6 @@ public interface WatchlistRepository extends org.springframework.data.jpa.reposi
     @Query("delete from Watchlist w where w.instrument = ?1")
     int deleteByInstrument(Instrument instrument);
 
-
+    @Override
+    void deleteById(Integer integer);
 }

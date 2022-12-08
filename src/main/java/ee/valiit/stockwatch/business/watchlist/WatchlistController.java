@@ -27,7 +27,7 @@ public class WatchlistController {
 
     @DeleteMapping("/watchlist")
     @Operation(summary = "Eemaldab instrumendi jälgimisnimekirjast")
-    public void removeFromWatchlist(String ticker) {
-        watchlistManagementService.removeFromWatchlist(ticker);
+    public void removeFromWatchlist(Integer id) {
+        watchlistManagementService.removeFromWatchlist(id);
     }
 }

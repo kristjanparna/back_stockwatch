@@ -53,6 +53,7 @@ public class WatchlistService {
         response.setTicker(instrument.getTicker());
         response.setPriceChangePercentage(instrument.getPriceChangePercentage());
         response.setShortName(instrument.getShortName());
+        response.setId(watchlist.getId());
     }
 
     private static WatchlistResponse watchlistToWatchlistResponse(Watchlist watchlist) {
@@ -112,9 +113,7 @@ public class WatchlistService {
         return instrument;
     }
 
-    public void removeFromWatchlist(String ticker) {
-        Instrument instrument;
-        instrument = instrumentService.findInstrumentByTicker(ticker);
-        watchlistRepository.deleteByInstrument(instrument);
+    public void removeFromWatchlist(Integer id) {
+        watchlistRepository.deleteById(id);
     }
 }
