@@ -111,4 +111,10 @@ public class WatchlistService {
         instrument = instrumentService.findInstrumentByTicker(request.getTicker());
         return instrument;
     }
+
+    public void removeFromWatchlist(String ticker) {
+        Instrument instrument;
+        instrument = instrumentService.findInstrumentByTicker(ticker);
+        watchlistRepository.deleteByInstrument(instrument);
+    }
 }

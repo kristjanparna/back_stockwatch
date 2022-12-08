@@ -20,4 +20,8 @@ public class WatchlistManagementService {
     public List<WatchlistResponse> getWatchlistData(Integer userId) {
         return watchlistService.getWatchlistData(userId);
     }
+
+    public void removeFromWatchlist(String ticker) {
+        watchlistService.removeFromWatchlist(ticker);
+    }
 }
