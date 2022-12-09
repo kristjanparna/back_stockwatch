@@ -11,7 +11,8 @@ import org.springframework.web.client.RestTemplate;
 import javax.annotation.Resource;
 import java.util.List;
 
-import static ee.valiit.stockwatch.business.user.HttpSettings.*;
+import static ee.valiit.stockwatch.business.user.HttpSettings.BASE_URL;
+import static ee.valiit.stockwatch.business.user.HttpSettings.TICKER_PREFIX;
 
 @Service
 public class TickerService {
@@ -19,7 +20,7 @@ public class TickerService {
     @Resource
     private RestTemplate restTemplate;
 
-    public List<Quote> getTickerInfo(String search)  {
+    public List<Quote> getTickerInfo(String search) {
         HttpHeaders headers = HttpSettings.createRapidApiHeaders();
         TickerInfo info = restTemplate.exchange(
                 BASE_URL + TICKER_PREFIX + search, HttpMethod.GET,

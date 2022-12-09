@@ -20,5 +20,4 @@ public interface TransactionMapper {
     @Mapping(source = "portfolio.transactionFee", target = "transactionFee")
     @InheritInverseConfiguration(name = "transactionDtoToTransaction1")
     TransactionDto transactionToTransactionDto(Transaction transaction);
-
 }

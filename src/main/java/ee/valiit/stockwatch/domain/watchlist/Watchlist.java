@@ -48,5 +48,4 @@ public class Watchlist {
     @NotNull
     @Column(name = "addition_date", nullable = false)
     private LocalDate additionDate;
-
 }

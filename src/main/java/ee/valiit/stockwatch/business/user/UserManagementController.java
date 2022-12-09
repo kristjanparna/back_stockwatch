@@ -3,7 +3,6 @@ package ee.valiit.stockwatch.business.user;
 
 import ee.valiit.stockwatch.business.user.login.LoginResponse;
 import ee.valiit.stockwatch.business.user.register.RegisterRequest;
-import ee.valiit.stockwatch.domain.user.user.User;
 import ee.valiit.stockwatch.domain.user.user.UserResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -23,8 +22,7 @@ public class UserManagementController {
     @GetMapping("/login")
     @Operation(summary = "Sisselogimise teenus")
     public LoginResponse login(@RequestParam String username, @RequestParam String password) {
-        LoginResponse login = userManagementService.login(username, password);
-        return login;
+        return userManagementService.login(username, password);
     }
 
     @PostMapping("/register")
@@ -36,8 +34,7 @@ public class UserManagementController {
     @GetMapping("/userinfo")
     @Operation(summary = "Leiab kasutajate info admin paneeli tabelisse")
     public List<UserResponse> getUsersInfo() {
-        List<UserResponse> usersInfo = userManagementService.getUsersInfo();
-        return usersInfo;
+        return userManagementService.getUsersInfo();
     }
 
     @GetMapping("/userinfo/detail")
@@ -47,8 +44,7 @@ public class UserManagementController {
             @ApiResponse(responseCode = "404", description = "Sisestatud kasutajanime ei leitud")
     })
     public UserResponse getDetailedUserInfo(String username) {
-        UserResponse detailedUserInfo = userManagementService.getDetailedUserInfo(username);
-        return detailedUserInfo;
+        return userManagementService.getDetailedUserInfo(username);
     }
 
     @PutMapping("/remove")

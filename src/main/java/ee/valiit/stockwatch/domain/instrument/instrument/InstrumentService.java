@@ -32,8 +32,7 @@ public class InstrumentService {
                 new HttpEntity<>(headers),
                 InstrumentInfo.class
         ).getBody();
-        InstrumentResponse instrumentResponse = instrumentToInstrumentResponse(instrument);
-        return instrumentResponse;
+        return instrumentToInstrumentResponse(instrument);
     }
 
     private static InstrumentResponse instrumentToInstrumentResponse(InstrumentInfo instrument) {

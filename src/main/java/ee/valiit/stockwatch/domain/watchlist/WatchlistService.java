@@ -32,8 +32,7 @@ public class WatchlistService {
 
     public List<WatchlistResponse> getWatchlistData(Integer userId) {
         List<Watchlist> userWatchlists = watchlistRepository.findAllByUserId(userId);
-        List<WatchlistResponse> responseList = combineWatchlistResponse(userWatchlists);
-        return responseList;
+        return combineWatchlistResponse(userWatchlists);
     }
 
     private List<WatchlistResponse> combineWatchlistResponse(List<Watchlist> watchlists) {

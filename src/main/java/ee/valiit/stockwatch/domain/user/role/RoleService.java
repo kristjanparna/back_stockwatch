@@ -1,6 +1,5 @@
 package ee.valiit.stockwatch.domain.user.role;
 
-import net.bytebuddy.asm.Advice;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

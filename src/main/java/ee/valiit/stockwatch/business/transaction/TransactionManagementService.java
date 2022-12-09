@@ -19,7 +19,7 @@ public class TransactionManagementService {
         return transactionService.getTransactionHistory(userId, transactionTypeId);
     }
 
-    public List<TransactionDto> findByUserIdAndTypeIdAndDate(Integer userId,Integer transactionTypeId, LocalDate dateStart, LocalDate dateEnd) {
+    public List<TransactionDto> findByUserIdAndTypeIdAndDate(Integer userId, Integer transactionTypeId, LocalDate dateStart, LocalDate dateEnd) {
         return transactionService.getTransactionHistory(userId, transactionTypeId, dateStart, dateEnd);
     }
 }

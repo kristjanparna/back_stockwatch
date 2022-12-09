@@ -6,7 +6,6 @@ import lombok.Data;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
-import java.math.BigDecimal;
 
 /**
  * A DTO for the {@link Portfolio} entity
@@ -23,6 +22,5 @@ public class PortfolioResponse implements Serializable {
     private float priceChangePercentage;
     private float earning;
     private String shortName;
-
 }
 

@@ -37,5 +37,4 @@ public class User {
     @NotNull
     @Column(name = "password", nullable = false, length = 50)
     private String password;
-
 }

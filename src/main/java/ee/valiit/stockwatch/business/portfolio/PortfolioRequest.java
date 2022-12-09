@@ -14,7 +14,6 @@ import java.time.LocalDate;
  */
 @Data
 public class PortfolioRequest implements Serializable {
-
     private Integer userId;
     @Size(max = 255)
     @NotNull

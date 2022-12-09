@@ -2,7 +2,9 @@ package ee.valiit.stockwatch.domain.user.user;
 
 import ee.valiit.stockwatch.business.user.login.LoginResponse;
 import ee.valiit.stockwatch.business.user.register.RegisterRequest;
-import org.mapstruct.*;
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+import org.mapstruct.ReportingPolicy;
 
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = "spring")
 public interface UserMapper {
@@ -20,5 +22,4 @@ public interface UserMapper {
     @Mapping(source = "contact.email", target = "email")
     @Mapping(source = "contact.start", target = "startDate")
     UserResponse userToUserResponse(User user);
-
 }

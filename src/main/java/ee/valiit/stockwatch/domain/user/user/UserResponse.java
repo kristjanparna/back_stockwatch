@@ -26,5 +26,4 @@ public class UserResponse implements Serializable {
     private final String email;
     @NotNull
     private final LocalDate startDate;
-
 }

@@ -25,7 +25,7 @@ public class Transaction {
     private Portfolio portfolio;
 
     @NotNull
-    @Column(name= "transaction_type_id", nullable = false)
+    @Column(name = "transaction_type_id", nullable = false)
     private Integer transactionTypeId;
 
     @NotNull
@@ -39,5 +39,4 @@ public class Transaction {
     @NotNull
     @Column(name = "date", nullable = false)
     private LocalDate date;
-
 }
