@@ -179,18 +179,6 @@ public class PortfolioService {
                 }
             }
         }
-        float totalEarning = 0;
-        float totalWorth = 0;
-        for (PortfolioResponse portfolioResponse : responseList) {
-            totalEarning += portfolioResponse.getEarning();
-            totalWorth += portfolioResponse.getEarning();
-        }
-
-        for (PortfolioResponse portfolioResponse : responseList) {
-            portfolioResponse.setEarning(totalEarning);
-            portfolioResponse.setPortfolioTotalWorth(totalWorth);
-        }
-
         return responseList;
     }
 
