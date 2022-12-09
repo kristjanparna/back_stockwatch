@@ -24,6 +24,8 @@ INSERT INTO public.contact (id, first_name, last_name, email, start, "end")
 VALUES (DEFAULT, 'Michael', 'Knight', 'kitt@email.com', DEFAULT, NULL);
 INSERT INTO public.contact (id, first_name, last_name, email, start, "end")
 VALUES (DEFAULT, 'John', 'Matrix', 'mrolympia@email.com', DEFAULT, NULL);
+INSERT INTO public.contact (id, first_name, last_name, email, start, "end")
+VALUES (DEFAULT, 'Dominic', 'Toretto', 'racerboy@email.com', DEFAULT, NULL);
 
 INSERT INTO public."user" (id, role_id, contact_id, username, password)
 VALUES (DEFAULT, 1, NULL, 'admin', '123');
@@ -45,6 +47,8 @@ INSERT INTO public."user" (id, role_id, contact_id, username, password)
 VALUES (DEFAULT, 2, 8, 'BestDriver', '123');
 INSERT INTO public."user" (id, role_id, contact_id, username, password)
 VALUES (DEFAULT, 2, 9, 'commando', '123');
+INSERT INTO public."user" (id, role_id, contact_id, username, password)
+VALUES (DEFAULT, 2, 10, 'DOM', '123');
 
 INSERT INTO public.instrument (id, ticker, shortname) VALUES (DEFAULT, 'MSFT', 'Microsoft Corporation');
 INSERT INTO public.instrument (id, ticker, shortname) VALUES (DEFAULT, 'AAPL', 'Apple Inc');
@@ -71,7 +75,6 @@ INSERT INTO public.instrument (id, ticker, shortname) VALUES (DEFAULT, 'BYD', 'B
 INSERT INTO public.instrument (id, ticker, shortname) VALUES (DEFAULT, 'DELL', 'Dell Technologies Inc.');
 INSERT INTO public.instrument (id, ticker, shortname) VALUES (DEFAULT, 'PFE', 'Pfizer, Inc.');
 
-
 INSERT INTO public.watchlist (id, user_id, instrument_id, price_higher, price_lower, user_comment, price_at_addition, addition_date)
 VALUES (DEFAULT, 2, 24, 30, 60, 'Kas koroona tuleb tagasi?', 50.24, DEFAULT);
 INSERT INTO public.watchlist (id, user_id, instrument_id, price_higher, price_lower, user_comment, price_at_addition, addition_date)
@@ -92,7 +95,6 @@ INSERT INTO public.watchlist (id, user_id, instrument_id, price_higher, price_lo
 VALUES (DEFAULT, 1, 3, 180, null, null, 37.96, DEFAULT);
 INSERT INTO public.watchlist (id, user_id, instrument_id, price_higher, price_lower, user_comment, price_at_addition, addition_date)
 VALUES (DEFAULT, 1, 7 , 36, 50, 'Kõrgete energiahindade tuules võiks ise ka rikkaks saada', 42.12, DEFAULT);
-
 
 INSERT INTO public.portfolio (id, user_id, instrument_id, purchase_price, amount, transaction_fee, purchase_date)
 VALUES (DEFAULT, 2, 9, 120.00, 60, 5.00, '2022-11-01');

@@ -16,12 +16,13 @@ public class PortfolioResponse implements Serializable {
     @Size(max = 255)
     @NotNull
     private String ticker;
-    private String shortName;
     private Integer totalAmount;
     private float totalTransactionFee;
     private float avgBuyingPrice;
     private float currentPrice;
     private float priceChangePercentage;
     private float earning;
+    private String shortName;
+
 }
 
